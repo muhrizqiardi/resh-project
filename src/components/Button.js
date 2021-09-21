@@ -1,23 +1,31 @@
 import styled from "styled-components";
 import colorPalette from "../variables/colorPalette";
-import color from 'color'
 
-const Wrapper = styled.button`
+const ButtonNormal = styled.button`
   border: none;
-  background-color: ${colorPalette.primaryDark};
-  color: white;
   padding: 13px;
+  background-color: ${colorPalette.primaryDark.hex()};
+  color: white;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 16px;
   border-radius: 30px;
+  cursor: pointer;
   &:hover {
-    background-color: black;
+    background-color: ${colorPalette.primaryDark.whiten(5).hex()};
+  }
+  &:focus {
+    box-shadow: 0px 0px 0px 4px ${colorPalette.primaryDark.fade(2).hex()};
   }
 `;
 
-function Button({ children }) {
-  return (
-    <Wrapper>
-      {children}
-    </Wrapper>
-  );
-}
-export default Button;
+export const ButtonPrimary = styled(ButtonNormal)`
+  background-color: ${colorPalette.primary.hex()};
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  &:hover {
+    background-color: ${colorPalette.primary.darken(.2).alpha(.1).hex()};
+  }
+
+`;
+
+export default ButtonNormal;

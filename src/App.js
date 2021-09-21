@@ -1,9 +1,11 @@
-import Button from "./components/Button";
-
+import ButtonNormal, { ButtonPrimary } from "./components/Button";
+import Textbox from "./components/TextBox";
 function App() {
   return (
     <div className="App">
-      <Button>A Button</Button>
+      <ButtonNormal>Button Normal</ButtonNormal>
+      <ButtonPrimary>Button Primary</ButtonPrimary>
+      <Textbox placeholder="Email" />
     </div>
   );
 }
