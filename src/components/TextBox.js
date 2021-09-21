@@ -6,7 +6,7 @@ const Textbox = styled.input`
   padding: 13px;
   border: 1.5px solid ${colorPalette.dark.hex()};
   border-radius: 5px;
-  &:focus {
+  &:focus-visible {
     border: 1.5px solid ${colorPalette.info};
   }
 `;

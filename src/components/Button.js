@@ -13,7 +13,7 @@ const ButtonNormal = styled.button`
   &:hover {
     background-color: ${colorPalette.primaryDark.whiten(5).rgb()};
   }
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primaryDark.alpha(0.4).rgb()};
   }
 `;
@@ -25,7 +25,7 @@ export const ButtonPrimary = styled(ButtonNormal)`
   &:hover {
     background-color: ${colorPalette.primary.darken(.2).hex()};
   }
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primary.alpha(0.4).rgb()};
   }
 `;
