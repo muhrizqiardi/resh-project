@@ -1,6 +1,7 @@
 import ButtonNormal, { ButtonPrimary } from "./components/Button";
 import Textbox from "./components/TextBox";
 import Card from "./components/Card";
+import Menu from "./components/Menu";
 
 const bookDetail = {
   author: "McBebek Donald",
@@ -154,6 +155,7 @@ function App() {
         }}
         time="2021-09-22T04:48:00.000Z"
       />
+      <Menu/>
     </div>
   );
 }
