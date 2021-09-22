@@ -1,7 +1,6 @@
 import ButtonNormal, { ButtonPrimary } from "./components/Button";
 import Textbox from "./components/TextBox";
 import BookCard from "./components/BookCard";
-import ReadingActivity from "./components/ReadingActivity";
 
 const bookDetail = {
   bookAuthor: "McBebek Donald",
@@ -46,7 +45,6 @@ function App() {
         }}
       />
       <BookCard {...bookDetail} />
-      <ReadingActivity/>
     </div>
   );
 }
