@@ -10,10 +10,10 @@ const ButtonNormal = styled.button`
   font-size: 16px;
   border-radius: 30px;
   cursor: pointer;
-  &:hover {
-    background-color: ${colorPalette.primaryDark.whiten(5).rgb()};
+  &:hover, &:active {
+    filter: brightness(1.5);
   }
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primaryDark.alpha(0.4).rgb()};
   }
 `;
@@ -22,10 +22,10 @@ export const ButtonPrimary = styled(ButtonNormal)`
   background-color: ${colorPalette.primary.hex()};
   font-family: Raleway, sans-serif;
   font-weight: 700;
-  &:hover {
-    background-color: ${colorPalette.primary.darken(.2).hex()};
+  &:hover, &:active {
+    filter: brightness(0.8);
   }
-  &:focus {
+  &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primary.alpha(0.4).rgb()};
   }
 `;
