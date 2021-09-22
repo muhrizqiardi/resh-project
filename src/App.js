@@ -106,7 +106,7 @@ function App() {
         }}
         activity="shared"
         quote={{
-          body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad rem fugit blanditiis mollitia deleniti vitae voluptatibus."
+          body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a efficitur justo. Morbi sit amet ipsum malesuada, maximus tortor pulvinar, volutpat justo. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nullam felis ipsum, sagittis nec est ac, semper gravida ante. Duis dignissim diam cursus dolor congue tincidunt. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nulla facilisi. Ut dui mi, pretium tincidunt dolor vitae, tempus scelerisque sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam leo ligula, sagittis et mattis at, aliquam id nibh.",
         }}
         time="2021-09-22T02:18:00.000Z"
       />
@@ -147,7 +147,11 @@ function App() {
           img: "https://dummyimage.com/100x150.png",
           year: 1928,
         }}
-        activity="finished reading"
+        activity="reviewed"
+        review={{
+          rating: 0.875,
+          body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a efficitur justo. Morbi sit amet ipsum malesuada, maximus tortor pulvinar, volutpat justo. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nullam felis ipsum, sagittis nec est ac, semper gravida ante. Duis dignissim diam cursus dolor congue tincidunt. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nulla facilisi. Ut dui mi, pretium tincidunt dolor vitae, tempus scelerisque sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam leo ligula, sagittis et mattis at, aliquam id nibh."
+        }}
         time="2021-09-22T04:48:00.000Z"
       />
     </div>

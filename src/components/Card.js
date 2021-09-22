@@ -9,7 +9,8 @@ const Wrapper = styled.div`
   /* Mobile */
   box-sizing: content-box;
   width: 100%;
-  ${(props) => (props.isQuote ? "min-height: 120px;" : "height: 120px;")}
+  min-height: 120px;
+  /* ${(props) => (props.isQuote ? "" : "height: 120px;")} */
   background-color: white;
   border: 3px solid ${colorPalette.primaryDark.rgb()};
   border-radius: 15px;
@@ -78,6 +79,14 @@ const Wrapper = styled.div`
       font-family: Inter, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
     }
+    & .rating {
+      margin-top: 4px;
+      margin-bottom: 7px;
+    }
+    & .review-body {
+      font-size: 11px;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
   }
   & .card-menu {
     padding: 10px;
@@ -119,16 +128,16 @@ const Wrapper = styled.div`
   /* Desktop */
   @media (min-width: 512px) {
     max-width: 768px;
-    ${(props) => (props.isQuote ? "min-height: 180px;" : "height: 180px;")}
+    /* ${(props) =>
+      props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
+    min-height: 180px;
     border-radius: 30px;
-    grid-template-columns: ${(props) => (!props.isQuote ? "115px" : "")} 1fr 60px;
+    grid-template-columns: ${(props) =>
+      !props.isQuote ? "115px" : ""} 1fr 60px;
     &:hover {
       box-shadow: 0px 1px 10px 0px #00000080;
       transform: translateY(-1px);
       transition-duration: 0.1s;
-    }
-    & .card-desc {
-      padding: 15px;
     }
     & .card-img {
       padding: 15px 0 15px 15px;
@@ -163,6 +172,7 @@ const Wrapper = styled.div`
       }
     }
     & .card-desc {
+      padding: 15px;
       &:hover {
         cursor: pointer;
       }
@@ -192,6 +202,14 @@ const Wrapper = styled.div`
         font-family: Inter, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
       }
+      & .rating {
+        margin-top: 4px;
+        margin-bottom: 7px;
+      }
+      & .review-body {
+        font-size: 16px;
+        font-family: Inter, Arial, Helvetica, sans-serif;
+      }
     }
     & .card-menu {
       padding: 15px 15px 15px 0;
@@ -219,7 +237,9 @@ function BookCard({ user, book, activity, time, review, quote }) {
             {user.username} {activity} {moment(time).fromNow()}
           </div>
           <div className="quote-body">{quote.body}</div>
-          <div className="quoted-from">From <span>{book.title}</span></div>
+          <div className="quoted-from">
+            From <span>{book.title}</span>
+          </div>
         </div>
       ) : (
         <div className="card-desc">
@@ -227,10 +247,25 @@ function BookCard({ user, book, activity, time, review, quote }) {
             {user.username} {activity} {moment(time).fromNow()}
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-author">
-            by <span>{book.author}</span>
-          </div>
-          <div className="book-year">{book.year}</div>
+          {review ? (
+            <>
+              <div className="rating">
+                <i className="bx bxs-star"></i>
+                <i className="bx bxs-star"></i>
+                <i className="bx bxs-star"></i>
+                <i className="bx bx-star"></i>
+                <i className="bx bx-star"></i>
+              </div>
+              <div className="review-body">{review.body}</div>
+            </>
+          ) : (
+            <>
+              <div className="book-author">
+                by <span>{book.author}</span>
+              </div>
+              <div className="book-year">{book.year}</div>
+            </>
+          )}
         </div>
       )}
       <div className="card-menu">
