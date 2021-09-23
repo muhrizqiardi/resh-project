@@ -2,6 +2,7 @@ import ButtonNormal, { ButtonPrimary } from "./components/Button";
 import Textbox from "./components/TextBox";
 import Card from "./components/Card";
 import Menu from "./components/Menu";
+import Header from "./components/Header";
 
 const bookDetail = {
   author: "McBebek Donald",
@@ -45,6 +46,11 @@ const cardDetail = {
 function App() {
   return (
     <div className="App" style={{ display: "flex", flexDirection: "column" }}>
+      <Header
+        title="Home"
+        leftIcon={<i className="bx bx-chevron-left"></i>}
+        leftAction={() => (window.location = "https://google.com")}
+      />
       <ButtonNormal>Button Normal</ButtonNormal>
       <ButtonPrimary>Button Primary</ButtonPrimary>
       <Textbox placeholder="Email" />
@@ -151,11 +157,11 @@ function App() {
         activity="reviewed"
         review={{
           rating: 0.875,
-          body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a efficitur justo. Morbi sit amet ipsum malesuada, maximus tortor pulvinar, volutpat justo. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nullam felis ipsum, sagittis nec est ac, semper gravida ante. Duis dignissim diam cursus dolor congue tincidunt. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nulla facilisi. Ut dui mi, pretium tincidunt dolor vitae, tempus scelerisque sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam leo ligula, sagittis et mattis at, aliquam id nibh."
+          body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a efficitur justo. Morbi sit amet ipsum malesuada, maximus tortor pulvinar, volutpat justo. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nullam felis ipsum, sagittis nec est ac, semper gravida ante. Duis dignissim diam cursus dolor congue tincidunt. Sed pretium pulvinar mauris, nec lobortis justo rhoncus nec. Nulla facilisi. Ut dui mi, pretium tincidunt dolor vitae, tempus scelerisque sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam leo ligula, sagittis et mattis at, aliquam id nibh.",
         }}
         time="2021-09-22T04:48:00.000Z"
       />
-      <Menu closed/>
+      {/* <Menu closed/> */}
     </div>
   );
 }

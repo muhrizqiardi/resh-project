@@ -173,9 +173,6 @@ const Wrapper = styled.div`
     }
     & .card-desc {
       padding: 15px;
-      &:hover {
-        cursor: pointer;
-      }
       & .card-status {
         font-size: 12px;
         font-family: Inter, Arial, Helvetica, sans-serif;
