@@ -126,7 +126,7 @@ const Wrapper = styled.div`
   }
 
   /* Desktop */
-  @media (min-width: 512px) {
+  @media (min-width: 768px) {
     max-width: 768px;
     /* ${(props) =>
       props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
