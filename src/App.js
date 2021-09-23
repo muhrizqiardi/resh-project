@@ -155,7 +155,7 @@ function App() {
         }}
         time="2021-09-22T04:48:00.000Z"
       />
-      <Menu/>
+      <Menu closed/>
     </div>
   );
 }
