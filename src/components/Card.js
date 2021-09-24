@@ -4,7 +4,7 @@ import dotsMenu from "../assets/dots-menu.svg";
 import addToLibrary from "../assets/add-to-library.svg";
 import share from "../assets/share.svg";
 import moment from "moment";
-
+import Color from 'color'
 const Wrapper = styled.div`
   /* Mobile */
   box-sizing: content-box;
@@ -127,7 +127,7 @@ const Wrapper = styled.div`
 
   /* Desktop */
   @media (min-width: 768px) {
-    max-width: 768px;
+    max-width: 765px;
     /* ${(props) =>
       props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
     min-height: 180px;
@@ -135,9 +135,7 @@ const Wrapper = styled.div`
     grid-template-columns: ${(props) =>
       !props.isQuote ? "115px" : ""} 1fr 60px;
     &:hover {
-      box-shadow: 0px 1px 10px 0px #00000080;
-      transform: translateY(-1px);
-      transition-duration: 0.1s;
+      background-color: ${Color('#ffffff').darken(0.04).rgb()};
     }
     & .card-img {
       padding: 15px 0 15px 15px;

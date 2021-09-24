@@ -2,11 +2,14 @@ import styled from "styled-components";
 import colorPalette from "../variables/colorPalette";
 
 const Wrapper = styled.header`
-  max-width: 768px;
+  max-width: 772px;
   height: 56px;
+  margin: 0 auto;
   background-color: ${colorPalette.light.rgb()};
   font-family: Raleway, Arial, Helvetica, sans-serif;
   font-size: 24px;
+  position: sticky;
+  top: 0;
   display: grid;
   grid-template-columns: 56px 1fr 56px;
   & .left-action,

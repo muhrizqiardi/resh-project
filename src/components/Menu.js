@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import colorPalette from "../variables/colorPalette";
 
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   font-size: 25px;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  & .toggler-icon, 
+  & .toggler-icon,
   & .menu-item,
   & .profile-menu {
     cursor: pointer;
@@ -28,12 +29,18 @@ const Wrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      &.active {
+        background-color: ${colorPalette.primary.rgb()};
+      }
       & .menu-text {
         display: none;
       }
     }
   }
   & .profile-menu {
+    &.active {
+      background-color: ${colorPalette.primary.rgb()};
+    }
     & .profile-avatar {
       height: 56px;
       display: flex;
@@ -52,7 +59,8 @@ const Wrapper = styled.div`
   @media (min-width: 768px) {
     width: ${(props) => (props.closed ? "56px" : "256px")};
     height: 100vh;
-flex    background-color: ${colorPalette.primaryDark.rgb()};
+    flex-shrink: 0;
+    background-color: ${colorPalette.primaryDark.rgb()};
     border-radius: 0px 30px 30px 0px;
     transition: width 0.5s;
     display: flex;
@@ -60,8 +68,6 @@ flex    background-color: ${colorPalette.primaryDark.rgb()};
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* position: fixed; */
-    /* left: 0; */
     color: white;
     font-size: 25px;
     & .toggler {
@@ -165,7 +171,14 @@ flex    background-color: ${colorPalette.primaryDark.rgb()};
   }
 `;
 
-function Menu({ closed, feedMenuOnClick, searchMenuOnClick, libraryMenuOnClick, profileMenuOnClick }) {
+function Menu({
+  closed,
+  feedMenuOnClick,
+  searchMenuOnClick,
+  libraryMenuOnClick,
+  profileMenuOnClick,
+}) {
+  const location = useLocation();
   const [isClosed, setIsClosed] = useState(closed);
   return (
     <Wrapper closed={isClosed}>
@@ -179,26 +192,46 @@ function Menu({ closed, feedMenuOnClick, searchMenuOnClick, libraryMenuOnClick, 
         </div>
       </div>
       <div className="nav">
-        <div onClick={feedMenuOnClick} className="feed-menu menu-item">
+        <div
+          onClick={feedMenuOnClick}
+          className={`feed-menu menu-item ${
+            location.pathname === "/feed" ? "active" : ""
+          }`}
+        >
           <div className="feed-icon menu-icon">
             <i className="bx bx-compass"></i>
           </div>
           <p className="feed-text menu-text">Feed</p>
         </div>
-        <div onClick={searchMenuOnClick} className="search-menu menu-item">
+        <div
+          onClick={searchMenuOnClick}
+          className={`search-menu menu-item ${
+            location.pathname === "/search" ? "active" : ""
+          }`}
+        >
           <div className="search-icon menu-icon">
             <i className="bx bx-search"></i>
           </div>
           <p className="search-text menu-text">Search</p>
         </div>
-        <div onClick={libraryMenuOnClick} className="library-menu menu-item">
+        <div
+          onClick={libraryMenuOnClick}
+          className={`library-menu menu-item ${
+            location.pathname === "/library" ? "active" : ""
+          }`}
+        >
           <div className="library-icon menu-icon">
             <i className="bx bx-library"></i>
           </div>
           <p className="library-text menu-text">Library</p>
         </div>
       </div>
-      <div onClick={profileMenuOnClick} className="profile-menu">
+      <div
+        onClick={profileMenuOnClick}
+        className={`profile-menu ${
+          location.pathname === "/me" ? "active" : ""
+        }`}
+      >
         <div className="profile-avatar">
           <img
             src="https://thispersondoesnotexist.com/image"
