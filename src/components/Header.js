@@ -6,7 +6,7 @@ const Wrapper = styled.header`
   height: 56px;
   background-color: ${colorPalette.light.rgb()};
   font-family: Raleway, Arial, Helvetica, sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   display: grid;
   grid-template-columns: 56px 1fr 56px;
   & .left-action,
@@ -36,6 +36,7 @@ const Wrapper = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 1;
     & h1 {
       font-family: Raleway, Arial, Helvetica, sans-serif;
       font-size: 24px;

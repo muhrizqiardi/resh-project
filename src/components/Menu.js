@@ -6,13 +6,16 @@ const Wrapper = styled.div`
   /* Mobile */
   width: 100vw;
   height: 56px;
-  position: fixed;
-  bottom: 0;
   background-color: ${colorPalette.primaryDark.rgb()};
   color: white;
   font-size: 25px;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  & .toggler-icon, 
+  & .menu-item,
+  & .profile-menu {
+    cursor: pointer;
+  }
   & .toggler {
     display: none;
   }
@@ -41,21 +44,24 @@ const Wrapper = styled.div`
         border: 2px solid #ffffff;
       }
     }
+    & .profile-name {
+      display: none;
+    }
   }
   /* Desktop */
   @media (min-width: 768px) {
     width: ${(props) => (props.closed ? "56px" : "256px")};
     height: 100vh;
-    background-color: ${colorPalette.primaryDark.rgb()};
+flex    background-color: ${colorPalette.primaryDark.rgb()};
     border-radius: 0px 30px 30px 0px;
-    ${(props) => (props.closed ? "transition: width 0.5s;" : "")};
+    transition: width 0.5s;
     display: flex;
     overflow: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    left: 0;
+    /* position: fixed; */
+    /* left: 0; */
     color: white;
     font-size: 25px;
     & .toggler {
@@ -159,12 +165,12 @@ const Wrapper = styled.div`
   }
 `;
 
-function Menu({ closed }) {
-  const [isClosed, setIsClosed] = useState(closed)
+function Menu({ closed, feedMenuOnClick, searchMenuOnClick, libraryMenuOnClick, profileMenuOnClick }) {
+  const [isClosed, setIsClosed] = useState(closed);
   return (
     <Wrapper closed={isClosed}>
       <div className="toggler">
-        <div className="toggler-icon" onClick={() => setIsClosed(x => !x)}>
+        <div className="toggler-icon" onClick={() => setIsClosed((x) => !x)}>
           {isClosed ? (
             <i className="bx bx-menu"></i>
           ) : (
@@ -173,26 +179,26 @@ function Menu({ closed }) {
         </div>
       </div>
       <div className="nav">
-        <div className="feed-menu menu-item">
+        <div onClick={feedMenuOnClick} className="feed-menu menu-item">
           <div className="feed-icon menu-icon">
             <i className="bx bx-compass"></i>
           </div>
           <p className="feed-text menu-text">Feed</p>
         </div>
-        <div className="search-menu menu-item">
+        <div onClick={searchMenuOnClick} className="search-menu menu-item">
           <div className="search-icon menu-icon">
             <i className="bx bx-search"></i>
           </div>
           <p className="search-text menu-text">Search</p>
         </div>
-        <div className="library-menu menu-item">
+        <div onClick={libraryMenuOnClick} className="library-menu menu-item">
           <div className="library-icon menu-icon">
             <i className="bx bx-library"></i>
           </div>
           <p className="library-text menu-text">Library</p>
         </div>
       </div>
-      <div className="profile-menu">
+      <div onClick={profileMenuOnClick} className="profile-menu">
         <div className="profile-avatar">
           <img
             src="https://thispersondoesnotexist.com/image"
