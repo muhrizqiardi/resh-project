@@ -1,15 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import { getFirestore, collection, getDocs} from "firebase/firestore";
 
 function Feed(props) {
   const [feed, setFeed] = useState([]);
+  const db = getFirestore();
 
   async function getFeed() {
     try {
-      const response = await axios.get("http://localhost:9000/feed");
-      console.log(response.data);
-      setFeed(response.data);
+      // const response = await axios.get("http://localhost:9000/feed");
+      const querySnapshot = await getDocs(collection(db, "users"))
+      console.log(querySnapshot);
+      // console.log(response.data);
+      // setFeed(response.data);
     } catch (error) {
       console.error(error);
     }

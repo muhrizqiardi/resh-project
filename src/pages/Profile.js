@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import ButtonNormal, {ButtonPrimary} from "../components/Button"
 
+
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
