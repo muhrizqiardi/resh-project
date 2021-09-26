@@ -22,7 +22,7 @@ function Search(props) {
 
   useEffect(() => {
     getSearchResult();
-  }, [searchQuery]);
+  });
 
   return (
     <>
