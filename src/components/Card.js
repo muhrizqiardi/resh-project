@@ -4,7 +4,7 @@ import dotsMenu from "../assets/dots-menu.svg";
 import addToLibrary from "../assets/add-to-library.svg";
 import share from "../assets/share.svg";
 import moment from "moment";
-import Color from 'color'
+import Color from "color";
 const Wrapper = styled.div`
   /* Mobile */
   box-sizing: content-box;
@@ -79,6 +79,12 @@ const Wrapper = styled.div`
       font-family: Inter, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
     }
+    & .book-progress {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
     & .rating {
       margin-top: 4px;
       margin-bottom: 7px;
@@ -132,10 +138,9 @@ const Wrapper = styled.div`
       props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
     min-height: 180px;
     border-radius: 30px;
-    grid-template-columns: ${(props) =>
-      !props.isQuote ? "115px" : ""} 1fr 60px;
+    grid-template-columns: ${(props) => (!props.isQuote ? "115px" : "")} 1fr 60px;
     &:hover {
-      background-color: ${Color('#ffffff').darken(0.04).rgb()};
+      background-color: ${Color("#ffffff").darken(0.04).rgb()};
     }
     & .card-img {
       padding: 15px 0 15px 15px;
@@ -218,7 +223,7 @@ const Wrapper = styled.div`
   }
 `;
 
-function BookCard({ user, book, activity, time, review, quote }) {
+function BookCard({ user, book, activity, time, review, quote, progress }) {
   return (
     <Wrapper isQuote={quote}>
       {!quote && (
@@ -256,9 +261,10 @@ function BookCard({ user, book, activity, time, review, quote }) {
           ) : (
             <>
               <div className="book-author">
-                by <span>{book.author}</span>
+                by <span>{book.author}</span> ·
+                <span className="book-year"> {book.year}</span>
               </div>
-              <div className="book-year">{book.year}</div>
+              {<div className="book-progress">35 out of 107 pages</div>}
             </>
           )}
         </div>

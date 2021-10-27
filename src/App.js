@@ -6,6 +6,10 @@ import Header from "./components/Header";
 import { useHistory } from "react-router";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
+import Library from "./pages/Library";
+import Details from "./pages/Details";
+import CreateAccount from "./components/CreateAccount";
+import Login from "./components/Login";
 
 const Wrapper = styled.div`
   /* Mobile */
@@ -50,18 +54,20 @@ const Container = styled.div`
   row-gap: 10px;
 `;
 
+const login = false;
+
 function App() {
   const history = useHistory();
   return (
     <Wrapper>
-      <Menu
-        feedMenuOnClick={() => history.push("/feed")}
-        searchMenuOnClick={() => history.push("/search")}
-        libraryMenuOnClick={() => history.push("/library")}
-        profileMenuOnClick={() => history.push("/me")}
-      />
       <Switch>
         <Route path="/feed">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           {/* Feed */}
           <Main>
             <Header title="Feed" />
@@ -74,6 +80,12 @@ function App() {
         </Route>
 
         <Route path="/search">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Search"
@@ -97,6 +109,12 @@ function App() {
         </Route>
 
         <Route path="/library">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Library"
@@ -113,13 +131,19 @@ function App() {
             />
             <Content>
               <Container>
-                <Feed />
+                <Library />
               </Container>
             </Content>
           </Main>
         </Route>
 
         <Route path="/me">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Your Profile"
@@ -141,6 +165,46 @@ function App() {
             </Content>
           </Main>
         </Route>
+
+        <Route path="/details">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
+          <Main>
+            <Header
+              title="Details"
+              leftIcon={
+                history.length > 1 ? (
+                  <i className="bx bx-chevron-left"></i>
+                ) : (
+                  <></>
+                )
+              }
+              leftAction={
+                history.length > 1 ? () => history.push("/feed") : () => {}
+              }
+            />
+            <Content style={{ padding: 0 }}>
+              <Details />
+            </Content>
+          </Main>
+        </Route>
+
+        <Route path="/signup">
+          <CreateAccount />
+        </Route>
+
+        <Route path="/login">
+          <Login />
+        </Route>
+
+        <Route path="/">
+          {/* {false ? history.push('/feed'): history.push('/signup')} */}
+        </Route>
+
       </Switch>
     </Wrapper>
   );
