@@ -1,15 +1,16 @@
-import { Switch, Route } from "react-router-dom";
-import styled from "styled-components";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import Menu from "./components/Menu";
 import Feed from "./pages/Feed";
 import Header from "./components/Header";
-import { useHistory } from "react-router";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Library from "./pages/Library";
 import Details from "./pages/Details";
 import CreateAccount from "./components/CreateAccount";
 import Login from "./components/Login";
+import styled from "styled-components";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./contexts/AuthContext";
 
 const Wrapper = styled.div`
   /* Mobile */
@@ -54,14 +55,32 @@ const Container = styled.div`
   row-gap: 10px;
 `;
 
-const login = false;
-
 function App() {
   const history = useHistory();
-  return (
+  const { user, loading, session } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!session) history.push("/login");
+  }, []);
+  
+  return loading ? (
+    <></>
+  ) : (
     <Wrapper>
       <Switch>
-        <Route path="/feed">
+        <Route exact path="/">
+          {session ? (
+            // if user already created
+            user ? (
+              <Redirect to="/feed" />
+            ) : (
+              <Redirect to="/createaccount" />
+            )
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Route>
+        <Route exact path="/feed">
           <Menu
             feedMenuOnClick={() => history.push("/feed")}
             searchMenuOnClick={() => history.push("/search")}
@@ -79,7 +98,7 @@ function App() {
           </Main>
         </Route>
 
-        <Route path="/search">
+        <Route exact path="/search">
           <Menu
             feedMenuOnClick={() => history.push("/feed")}
             searchMenuOnClick={() => history.push("/search")}
@@ -108,7 +127,7 @@ function App() {
           </Main>
         </Route>
 
-        <Route path="/library">
+        <Route exact path="/library">
           <Menu
             feedMenuOnClick={() => history.push("/feed")}
             searchMenuOnClick={() => history.push("/search")}
@@ -137,7 +156,7 @@ function App() {
           </Main>
         </Route>
 
-        <Route path="/me">
+        <Route exact path="/me">
           <Menu
             feedMenuOnClick={() => history.push("/feed")}
             searchMenuOnClick={() => history.push("/search")}
@@ -166,7 +185,7 @@ function App() {
           </Main>
         </Route>
 
-        <Route path="/details">
+        <Route exact path="/details">
           <Menu
             feedMenuOnClick={() => history.push("/feed")}
             searchMenuOnClick={() => history.push("/search")}
@@ -193,18 +212,13 @@ function App() {
           </Main>
         </Route>
 
-        <Route path="/signup">
+        <Route exact path="/createaccount">
           <CreateAccount />
         </Route>
 
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
-
-        <Route path="/">
-          {/* {false ? history.push('/feed'): history.push('/signup')} */}
-        </Route>
-
       </Switch>
     </Wrapper>
   );

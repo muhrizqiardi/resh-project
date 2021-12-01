@@ -228,7 +228,12 @@ function BookCard({ user, book, activity, time, review, quote, progress }) {
     <Wrapper isQuote={quote}>
       {!quote && (
         <div className="card-img">
-          <img src={book.img} alt="placeholder" height="100%" width="100%" />
+          <img
+            src={book.imageLinks !== undefined ? book.imageLinks.thumbnail : ''}
+            alt="Cover Image"
+            height="100%"
+            width="100%"
+          />
         </div>
       )}
       {quote ? (
@@ -244,7 +249,9 @@ function BookCard({ user, book, activity, time, review, quote, progress }) {
       ) : (
         <div className="card-desc">
           <div className="card-status">
-            {user.username} {activity} {moment(time).fromNow()}
+            {activity
+              ? `${user.username} ${activity} ${moment(time).fromNow()}`
+              : ""}
           </div>
           <div className="book-title">{book.title}</div>
           {review ? (
@@ -261,10 +268,17 @@ function BookCard({ user, book, activity, time, review, quote, progress }) {
           ) : (
             <>
               <div className="book-author">
-                by <span>{book.author}</span> ·
-                <span className="book-year"> {book.year}</span>
+                by <span>{new Intl.ListFormat().format(book.authors)}</span> ·
+                <span className="book-year">
+                  {" "}
+                  {moment(book.publishedDate).year()}
+                </span>
               </div>
-              {<div className="book-progress">35 out of 107 pages</div>}
+              {
+                <div className="book-progress">
+                  {progress ? `${progress} out of ${book.pageCount} pages` : ``}
+                </div>
+              }
             </>
           )}
         </div>

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { ButtonPrimary } from "./Button";
 import Textbox from "./TextBox";
-import ButtonNormal from "./Button";
 import LogoText from "../assets/logo-text.png";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Wrapper = styled.div`
   max-width: 320px;
@@ -26,15 +28,23 @@ const Wrapper = styled.div`
 `;
 
 function Login(props) {
+  const { handleLogin, session } = useContext(AuthContext);
+  const [email, setEmail] = useState();
+  const history = useHistory();
+  
+  useEffect(() => {
+    if (session) {
+      history.push('/');
+    }
+  }, [session]);
+
   return (
     <Wrapper>
       <form action="" id="create-account-form">
         <img className="logo" src={LogoText} />
         <p>Welcome back</p>
-        <Textbox placeholder="Email" />
-        <Textbox placeholder="Password" />
-        <ButtonPrimary>Log In</ButtonPrimary>
-        <ButtonNormal>Create a Account</ButtonNormal>
+        <Textbox placeholder="Email" onChange={e => setEmail(e.target.value)}/>
+        <ButtonPrimary onClick={(e) => {e.preventDefault();handleLogin(email)}}>Log In</ButtonPrimary>
       </form>
     </Wrapper>
   );

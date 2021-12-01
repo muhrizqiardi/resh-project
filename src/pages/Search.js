@@ -11,10 +11,9 @@ function Search(props) {
   async function getSearchResult() {
     try {
       const response = await axios.get(
-        `http://localhost:9000/books?q=${searchQuery}`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`
       );
-      console.log(response.data);
-      setSearchResult(response.data);
+      setSearchResult(response.data.items);
     } catch (error) {
       console.error(error);
     }
@@ -22,34 +21,43 @@ function Search(props) {
 
   useEffect(() => {
     getSearchResult();
-  });
+  }, [searchQuery]);
 
   return (
     <>
       <Textbox
         placeholder="Search title or ISBN"
-        onChange={(event) => setSearchQuery(event.target.value)}
+        onKeyPress={(event) => {
+          if (event.key == "Enter") setSearchQuery(event.target.value);
+        }}
       />
 
       {searchQuery ? (
-        searchResult.map((result) => (
-          <Card
-            key={result.ISBN}
-            user={{
-              username: "muhrizqiardi",
-              name: {
-                firstName: "Muhammad Rizqi",
-                lastName: "Ardiansyah",
-              },
-            }}
-            book={result}
-            activity="added to library"
-            time="2021-09-22T00:48:00.000Z"
-          />
-        ))
+        searchResult.map((result) => {
+          console.log(result);
+          return (
+            <Card
+              key={result.id}
+              user={{
+                username: "muhrizqiardi",
+                name: {
+                  firstName: "Muhammad Rizqi",
+                  lastName: "Ardiansyah",
+                },
+              }}
+              book={result.volumeInfo}
+              // activity="added to library"
+              time="2021-09-22T00:48:00.000Z"
+            />
+          );
+        })
       ) : (
         <>
-          <img src={noSearchQueryImg} alt="Search Something..." style={{margin: "25vh auto"}} />
+          <img
+            src={noSearchQueryImg}
+            alt="Search Something..."
+            style={{ margin: "25vh auto" }}
+          />
         </>
       )}
     </>

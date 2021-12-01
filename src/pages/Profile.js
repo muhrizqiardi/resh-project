@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import ButtonNormal, {ButtonPrimary} from "../components/Button"
+import ButtonNormal, { ButtonPrimary } from "../components/Button";
+import { useHistory } from "react-router";
+import { supabase } from "../configs/supabase";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,6 +30,8 @@ const Wrapper = styled.div`
 `;
 
 function Profile(props) {
+  const history = useHistory();
+
   return (
     <Wrapper>
       <div className="profile-avatar">
@@ -43,7 +47,15 @@ function Profile(props) {
         venenatis lobortis mi.
       </p>
       <ButtonPrimary>Profile Settings</ButtonPrimary>
-      <ButtonNormal style={{margin: "10px 0"}}>Log Out</ButtonNormal>
+      <ButtonNormal
+        style={{ margin: "10px 0" }}
+        onClick={() => {
+          supabase.auth.signOut();
+          history.go(0);
+        }}
+      >
+        Log Out
+      </ButtonNormal>
     </Wrapper>
   );
 }
