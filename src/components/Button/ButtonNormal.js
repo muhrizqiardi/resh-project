@@ -17,4 +17,8 @@ export const ButtonNormal = styled.button`
   &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primaryDark.alpha(0.4).rgb()};
   }
+  &:disabled {
+    background-color: lightgray;
+    color: ${colorPalette.secondary};
+  }
 `;

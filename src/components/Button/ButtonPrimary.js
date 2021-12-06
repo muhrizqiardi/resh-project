@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colorPalette from "../../constants/colorPalette"
+import colorPalette from "../../constants/colorPalette";
 import { ButtonNormal } from ".";
 
 export const ButtonPrimary = styled(ButtonNormal)`
@@ -12,5 +12,9 @@ export const ButtonPrimary = styled(ButtonNormal)`
   }
   &:focus-visible {
     box-shadow: 0px 0px 0px 3px ${colorPalette.primary.alpha(0.4).rgb()};
+  }
+  &:disabled {
+    background-color: lightgray;
+    color: ${colorPalette.secondary};
   }
 `;
