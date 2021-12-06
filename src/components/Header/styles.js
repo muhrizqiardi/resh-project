@@ -2,10 +2,13 @@ import styled from "styled-components";
 import colorPalette from "../../constants/colorPalette";
 
 export const HeaderWrapper = styled.header`
-  max-width: 772px;
+  max-width: 768px;
   height: 56px;
   margin: 0 auto;
   background-color: ${colorPalette.light.rgb()};
+  box-sizing: content-box;
+  border-right: 3px solid ${colorPalette.light.rgb()};
+  border-left: 3px solid ${colorPalette.light.rgb()};
   font-family: Raleway, Arial, Helvetica, sans-serif;
   font-size: 24px;
   position: sticky;
