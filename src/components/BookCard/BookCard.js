@@ -2,7 +2,7 @@ import dotsMenu from "../assets/dots-menu.svg";
 import addToLibrary from "../assets/add-to-library.svg";
 import share from "../assets/share.svg";
 import moment from "moment";
-import { CardImg, CardWrapper, CardQuote } from "./BookCard/styles";
+import { CardImg, CardWrapper, CardQuote } from "./styles"
 
 function BookCard({ user, book, activity, time, review, quote }) {
   return (
