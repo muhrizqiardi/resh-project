@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
+import BookCard from "../components/BookCard";
 import Textbox from "../components/TextBox";
 import noSearchQueryImg from "../assets/no-search-query.png";
 
@@ -11,7 +11,7 @@ function Search(props) {
   async function getSearchResult() {
     try {
       const response = await axios.get(
-        `http://localhost:9000/books?q=${searchQuery}`
+        `${process.env.REACT_APP_MOCK_API_URL}/feed`
       );
       console.log(response.data);
       setSearchResult(response.data);
@@ -33,7 +33,7 @@ function Search(props) {
 
       {searchQuery ? (
         searchResult.map((result) => (
-          <Card
+          <BookCard
             key={result.ISBN}
             user={{
               username: "muhrizqiardi",
