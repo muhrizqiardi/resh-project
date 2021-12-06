@@ -1,4 +1,4 @@
-import { Header, Main, Wrapper, ErrorMessage } from "./styles";
+import { Header, Main, Wrapper, ErrorMessage, SuccessMessage } from "./styles";
 import logoText from "../../assets/brand/Logo Text.png";
 import TextBox from "../../components/TextBox";
 import { ButtonPrimary } from "../../components/Button";
@@ -16,23 +16,35 @@ function SignIn(props) {
       <Header>
         <img src={logoText} alt="Logo" />
       </Header>
-      <Main>
-        <p>Please enter your email.</p>
-        <TextBox
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <ErrorMessage>
-          Unable to validate email address: invalid format
-        </ErrorMessage>
-        <ButtonPrimary
-          onClick={async () => {
-            await dispatch.auth.signInAsync(email);
-          }}
-        >
-          Sign In
-        </ButtonPrimary>
-      </Main>
+      {auth.magicLinkSent ? (
+        <Main>
+          <SuccessMessage>
+            A sign in link has been sent to your email.{" "}
+          </SuccessMessage>
+        </Main>
+      ) : (
+        <Main>
+          <p>Please enter your email.</p>
+          <TextBox
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={auth.loading}
+          />
+          {auth.error ? (
+            <ErrorMessage>{auth.error.message}</ErrorMessage>
+          ) : (
+            <></>
+          )}
+          <ButtonPrimary
+            onClick={async () => {
+              await dispatch.auth.signInAsync(email);
+            }}
+            disabled={auth.loading}
+          >
+            Sign In
+          </ButtonPrimary>
+        </Main>
+      )}
     </Wrapper>
   );
 }

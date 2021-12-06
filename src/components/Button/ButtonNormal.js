@@ -20,5 +20,9 @@ export const ButtonNormal = styled.button`
   &:disabled {
     background-color: lightgray;
     color: ${colorPalette.secondary};
+    cursor: not-allowed;
+    &:hover {
+      filter: brightness(1);
+    }
   }
 `;

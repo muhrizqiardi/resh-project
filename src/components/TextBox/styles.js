@@ -9,4 +9,9 @@ export const TextBox = styled.input`
   &:focus-visible {
     border: 1.5px solid ${colorPalette.info};
   }
+  &:disabled {
+    border: 1.5px solid gray;
+    color: lightgray;
+    cursor: not-allowed;
+  }
 `;

@@ -2,14 +2,14 @@ import styled from "styled-components";
 import colorPalette from "../../constants/colorPalette";
 
 export const Wrapper = styled.div`
-  max-width: 320px;
+  width: 320px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   @media (min-width: 768px) {
-    margin-top: 6;
+    margin-top: 64px;
   }
 `;
 
@@ -36,4 +36,12 @@ export const ErrorMessage = styled.div`
   text-align: left;
   font-size: 0.85em;
   color: ${colorPalette.error};
+`;
+
+export const SuccessMessage = styled.div`
+  padding: 30px;
+  color: black;
+  background-color: white;
+  border: 1.5px solid ${colorPalette.success};
+  border-radius: 15px;
 `;
