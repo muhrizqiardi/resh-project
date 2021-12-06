@@ -54,15 +54,14 @@ function App() {
   const history = useHistory();
   return (
     <Wrapper>
-      <Menu
-        feedMenuOnClick={() => history.push("/feed")}
-        searchMenuOnClick={() => history.push("/search")}
-        libraryMenuOnClick={() => history.push("/library")}
-        profileMenuOnClick={() => history.push("/me")}
-      />
       <Switch>
         <Route path="/feed">
-          {/* Feed */}
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header title="Feed" />
             <Content>
@@ -74,6 +73,12 @@ function App() {
         </Route>
 
         <Route path="/search">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Search"
@@ -97,6 +102,12 @@ function App() {
         </Route>
 
         <Route path="/library">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Library"
@@ -120,6 +131,12 @@ function App() {
         </Route>
 
         <Route path="/me">
+          <Menu
+            feedMenuOnClick={() => history.push("/feed")}
+            searchMenuOnClick={() => history.push("/search")}
+            libraryMenuOnClick={() => history.push("/library")}
+            profileMenuOnClick={() => history.push("/me")}
+          />
           <Main>
             <Header
               title="Your Profile"
