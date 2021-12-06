@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colorPalette from "../../constants/colorPalette";
 
 export const Wrapper = styled.div`
   max-width: 320px;
@@ -8,7 +9,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   @media (min-width: 768px) {
-    margin-top: 64px;
+    margin-top: 6;
   }
 `;
 
@@ -29,4 +30,10 @@ export const Main = styled.main`
   justify-items: stretch;
   align-content: center;
   text-align: center;
+`;
+
+export const ErrorMessage = styled.div`
+  text-align: left;
+  font-size: 0.85em;
+  color: ${colorPalette.error};
 `;
