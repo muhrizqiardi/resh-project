@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import colorPalette from "../constants/colorPalette";
+import colorPalette from "../../constants/colorPalette";
 
-const Wrapper = styled.header`
+export const HeaderWrapper = styled.header`
   max-width: 772px;
   height: 56px;
   margin: 0 auto;
@@ -12,8 +12,8 @@ const Wrapper = styled.header`
   top: 0;
   display: grid;
   grid-template-columns: 56px 1fr 56px;
-  & .left-action,
-  & .right-action {
+  .left-action,
+  .right-action {
     background-color: ${colorPalette.light.rgb()};
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ const Wrapper = styled.header`
   ${(props) =>
     props.leftActionAvailable
       ? `
-      & .left-action:hover {
+      .left-action:hover {
         filter: brightness(0.9);
       }
     `
@@ -30,17 +30,17 @@ const Wrapper = styled.header`
   ${(props) =>
     props.rightActionAvailable
       ? `
-      & .right-action:hover {
+      .right-action:hover {
         filter: brightness(0.9);
       }
     `
       : ""}
-  & .header-content {
+  .header-content {
     display: flex;
     justify-content: center;
     align-items: center;
     line-height: 1;
-    & h1 {
+    h1 {
       font-family: Raleway, Arial, Helvetica, sans-serif;
       font-size: 24px;
       text-align: center;
@@ -48,23 +48,3 @@ const Wrapper = styled.header`
     }
   }
 `;
-
-function Header({ title, leftIcon, leftAction, rightIcon, rightAction }) {
-  return (
-    <Wrapper
-      leftActionAvailable={Boolean(leftAction)}
-      rightActionAvailable={Boolean(rightAction)}
-    >
-      <div onClick={leftAction} className="left-action">
-        <div className="left-action-icon">{leftIcon}</div>
-      </div>
-      <div className="header-content">
-        <h1>{title}</h1>
-      </div>
-      <div onClick={rightAction} className="right-action">
-        <div className="left-action-icon">{rightIcon}</div>
-      </div>
-    </Wrapper>
-  );
-}
-export default Header;
