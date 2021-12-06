@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 
-function Feed(props) {
+export function FeedModule(props) {
   const [feed, setFeed] = useState([]);
 
   async function getFeed() {
@@ -27,4 +27,3 @@ function Feed(props) {
     </>
   );
 }
-export default Feed;

@@ -4,7 +4,7 @@ import BookCard from "../components/BookCard";
 import Textbox from "../components/TextBox";
 import noSearchQueryImg from "../assets/no-search-query.png";
 
-function Search(props) {
+export function SearchModule(props) {
   const [searchResult, setSearchResult] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -49,10 +49,13 @@ function Search(props) {
         ))
       ) : (
         <>
-          <img src={noSearchQueryImg} alt="Search Something..." style={{margin: "25vh auto"}} />
+          <img
+            src={noSearchQueryImg}
+            alt="Search Something..."
+            style={{ margin: "25vh auto" }}
+          />
         </>
       )}
     </>
   );
 }
-export default Search;
