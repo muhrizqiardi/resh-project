@@ -1581,6 +1581,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@rematch/core@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@rematch/core/-/core-2.2.0.tgz#c4e6cc9d369d341afe2345842f43c255b7a44e90"
+  integrity sha512-Sj3nC/2X+bOBZeOf4jdJ00nhCcx9wLbVK9SOs6eFR4Y1qKXqRY0hGigbQgfTpCdjRFlwTHHfN3m41MlNvMhDgw==
+
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
@@ -1652,7 +1657,7 @@
   dependencies:
     cross-fetch "^3.1.0"
 
-"@supabase/supabase-js@^1.28.5":
+"@supabase/supabase-js@^1.25.1":
   version "1.28.5"
   resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-1.28.5.tgz#359724ceda630f54a4fd403e225b68128c29b1a7"
   integrity sha512-RZFSkj0tC6YppUVOBDldLLko4BgV8ASY+OiXC1ZxpcwmNInPgGiDkv59kVPN1UC96vnRQ/1fbFngPcwTtb1Qjw==
