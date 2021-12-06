@@ -32,7 +32,7 @@ export const Content = styled.div`
   @media (min-width: 768px) {
     height: unset;
     overflow-y: unset;
-    padding: 10px 0;
+    padding: 10px 10px;
   }
 `;
 
