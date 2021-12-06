@@ -12,8 +12,8 @@ export const HeaderWrapper = styled.header`
   top: 0;
   display: grid;
   grid-template-columns: 56px 1fr 56px;
-  & .left-action,
-  & .right-action {
+  .left-action,
+  .right-action {
     background-color: ${colorPalette.light.rgb()};
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ export const HeaderWrapper = styled.header`
   ${(props) =>
     props.leftActionAvailable
       ? `
-      & .left-action:hover {
+      .left-action:hover {
         filter: brightness(0.9);
       }
     `
@@ -30,17 +30,17 @@ export const HeaderWrapper = styled.header`
   ${(props) =>
     props.rightActionAvailable
       ? `
-      & .right-action:hover {
+      .right-action:hover {
         filter: brightness(0.9);
       }
     `
       : ""}
-  & .header-content {
+  .header-content {
     display: flex;
     justify-content: center;
     align-items: center;
     line-height: 1;
-    & h1 {
+    h1 {
       font-family: Raleway, Arial, Helvetica, sans-serif;
       font-size: 24px;
       text-align: center;
