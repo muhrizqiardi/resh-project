@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { useLocation } from "react-router";
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
+import colorPalette from "../../constants/colorPalette";
 
-const Wrapper = styled.div`
+export const MenuWrapper = styled.div`
   /* Mobile */
   width: 100vw;
   height: 56px;
@@ -12,19 +10,19 @@ const Wrapper = styled.div`
   font-size: 25px;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  & .toggler-icon,
-  & .menu-item,
-  & .profile-menu {
+  .toggler-icon,
+  .menu-item,
+  .profile-menu {
     cursor: pointer;
   }
-  & .toggler {
+  .toggler {
     display: none;
   }
-  & .nav {
+  .nav {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     height: 56px;
-    & .menu-item {
+    .menu-item {
       background-color: ${colorPalette.primaryDark.rgb()};
       display: flex;
       justify-content: center;
@@ -32,26 +30,26 @@ const Wrapper = styled.div`
       &.active {
         background-color: ${colorPalette.primary.rgb()};
       }
-      & .menu-text {
+      .menu-text {
         display: none;
       }
     }
   }
-  & .profile-menu {
+  .profile-menu {
     &.active {
       background-color: ${colorPalette.primary.rgb()};
     }
-    & .profile-avatar {
+    .profile-avatar {
       height: 56px;
       display: flex;
       justify-content: center;
       align-items: center;
-      & img {
+      img {
         border-radius: 100%;
         border: 2px solid #ffffff;
       }
     }
-    & .profile-name {
+    .profile-name {
       display: none;
     }
   }
@@ -70,7 +68,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     color: white;
     font-size: 25px;
-    & .toggler {
+    .toggler {
       width: 100%;
       height: 56px;
       background-color: ${colorPalette.primaryDark.rgb()};
@@ -78,7 +76,7 @@ const Wrapper = styled.div`
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
-      & .toggler-icon {
+      .toggler-icon {
         width: 56px;
         height: 56px;
         background-color: ${colorPalette.primaryDark.rgb()};
@@ -94,12 +92,12 @@ const Wrapper = styled.div`
         }
       }
     }
-    & .nav {
+    .nav {
       width: 100%;
       height: 70%;
       display: flex;
       flex-direction: column;
-      & .menu-item {
+      .menu-item {
         width: 100%;
         height: 56px;
         padding: 0 20px;
@@ -117,14 +115,14 @@ const Wrapper = styled.div`
         &.active {
           background-color: ${colorPalette.primary.rgb()};
         }
-        & .menu-icon {
+        .menu-icon {
           width: 56px;
           height: 56px;
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        & .menu-text {
+        .menu-text {
           display: ${(props) => (props.closed ? "none" : "block")};
           font-family: Raleway, Arial, Helvetica, sans-serif;
           font-weight: 700;
@@ -133,7 +131,7 @@ const Wrapper = styled.div`
         }
       }
     }
-    & .profile-menu {
+    .profile-menu {
       width: 100%;
       height: 56px;
       padding: ${(props) => (props.closed ? "0" : "0 20px")};
@@ -152,14 +150,14 @@ const Wrapper = styled.div`
       &.active {
         background-color: ${colorPalette.primary.rgb()};
       }
-      & .profile-avatar {
+      .profile-avatar {
         width: 56px;
         height: 56px;
         display: flex;
         justify-content: center;
         align-items: center;
       }
-      & .profile-name {
+      .profile-name {
         display: ${(props) => (props.closed ? "none" : "block")};
         font-family: Raleway, Arial, Helvetica, sans-serif;
         font-size: 16px;
@@ -170,79 +168,3 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-function Menu({
-  closed,
-  feedMenuOnClick,
-  searchMenuOnClick,
-  libraryMenuOnClick,
-  profileMenuOnClick,
-}) {
-  const location = useLocation();
-  const [isClosed, setIsClosed] = useState(closed);
-  return (
-    <Wrapper closed={isClosed}>
-      <div className="toggler">
-        <div className="toggler-icon" onClick={() => setIsClosed((x) => !x)}>
-          {isClosed ? (
-            <i className="bx bx-menu"></i>
-          ) : (
-            <i className="bx bx-chevrons-left"></i>
-          )}
-        </div>
-      </div>
-      <div className="nav">
-        <div
-          onClick={feedMenuOnClick}
-          className={`feed-menu menu-item ${
-            location.pathname === "/feed" ? "active" : ""
-          }`}
-        >
-          <div className="feed-icon menu-icon">
-            <i className="bx bx-compass"></i>
-          </div>
-          <p className="feed-text menu-text">Feed</p>
-        </div>
-        <div
-          onClick={searchMenuOnClick}
-          className={`search-menu menu-item ${
-            location.pathname === "/search" ? "active" : ""
-          }`}
-        >
-          <div className="search-icon menu-icon">
-            <i className="bx bx-search"></i>
-          </div>
-          <p className="search-text menu-text">Search</p>
-        </div>
-        <div
-          onClick={libraryMenuOnClick}
-          className={`library-menu menu-item ${
-            location.pathname === "/library" ? "active" : ""
-          }`}
-        >
-          <div className="library-icon menu-icon">
-            <i className="bx bx-library"></i>
-          </div>
-          <p className="library-text menu-text">Library</p>
-        </div>
-      </div>
-      <div
-        onClick={profileMenuOnClick}
-        className={`profile-menu ${
-          location.pathname === "/me" ? "active" : ""
-        }`}
-      >
-        <div className="profile-avatar">
-          <img
-            src="https://thispersondoesnotexist.com/image"
-            width={25}
-            height={25}
-            alt=""
-          />
-        </div>
-        <p className="profile-name">Name McName</p>
-      </div>
-    </Wrapper>
-  );
-}
-export default Menu;

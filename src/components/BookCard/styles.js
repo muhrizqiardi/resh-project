@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
-import dotsMenu from "../assets/dots-menu.svg";
-import addToLibrary from "../assets/add-to-library.svg";
-import share from "../assets/share.svg";
-import moment from "moment";
-import Color from 'color'
-const Wrapper = styled.div`
+import colorPalette from "../../constants/colorPalette";
+import Color from "color";
+
+export const BookCardWrapper = styled.article`
   /* Mobile */
   box-sizing: content-box;
   width: 100%;
@@ -16,87 +13,87 @@ const Wrapper = styled.div`
   border-radius: 15px;
   display: grid;
   grid-template-columns: ${(props) => (!props.isQuote ? "80px" : "")} 1fr 60px;
-  & .card-img {
+  .card-img {
     padding: 10px 0 10px 10px;
-    & img {
+    img {
       height: 100px;
       width: 65px;
       border-radius: 7px;
     }
   }
-  & .card-quote {
+  .card-quote {
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    & .card-status {
+    .card-status {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
     }
-    & .quote-body {
+    .quote-body {
       font-size: 16px;
       font-weight: bold;
       font-family: Raleway, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
     }
-    & .quoted-from {
+    .quoted-from {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-top: 5px;
-      & span {
+      span {
         color: black;
       }
     }
   }
-  & .card-desc {
+  .card-desc {
     padding: 10px;
-    & .card-status {
+    .card-status {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
     }
-    & .book-title {
+    .book-title {
       font-size: 16px;
       font-weight: bold;
       font-family: Raleway, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
     }
-    & .book-author {
+    .book-author {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
-      & span {
+      span {
         color: black;
       }
     }
-    & .book-year {
+    .book-year {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
     }
-    & .rating {
+    .rating {
       margin-top: 4px;
       margin-bottom: 7px;
     }
-    & .review-body {
+    .review-body {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
     }
   }
-  & .card-menu {
+  .card-menu {
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: end;
-    & .menu-button,
-    & .love-button,
-    & .share-button {
+    .menu-button,
+    .love-button,
+    .share-button {
       width: 30px;
       height: 30px;
       background-color: white;
@@ -105,7 +102,7 @@ const Wrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      & img {
+      img {
         width: 20px;
         height: 20px;
       }
@@ -113,9 +110,9 @@ const Wrapper = styled.div`
         filter: brightness(0.75);
       }
     }
-    & .menu-button {
+    .menu-button {
       background-color: ${colorPalette.primaryDark.rgb()};
-      & img {
+      img {
         filter: invert(100%);
       }
       &:active {
@@ -132,150 +129,87 @@ const Wrapper = styled.div`
       props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
     min-height: 180px;
     border-radius: 30px;
-    grid-template-columns: ${(props) =>
-      !props.isQuote ? "115px" : ""} 1fr 60px;
+    grid-template-columns: ${(props) => (!props.isQuote ? "115px" : "")} 1fr 60px;
     &:hover {
-      background-color: ${Color('#ffffff').darken(0.04).rgb()};
+      background-color: ${Color("#ffffff").darken(0.04).rgb()};
     }
-    & .card-img {
+    .card-img {
       padding: 15px 0 15px 15px;
-      & img {
+      img {
         height: 150px;
         width: 100px;
         border-radius: 20px;
       }
     }
-    & .card-quote {
+    .card-quote {
       padding: 20px;
-      & .card-status {
+      .card-status {
         font-size: 12px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
       }
-      & .quote-body {
+      .quote-body {
         font-size: 24px;
         font-weight: bold;
         font-family: Raleway, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
       }
-      & .quoted-from {
+      .quoted-from {
         font-size: 14px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
-        & span {
+        span {
           color: black;
         }
       }
     }
-    & .card-desc {
+    .card-desc {
       padding: 15px;
-      & .card-status {
+      .card-status {
         font-size: 12px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
       }
-      & .book-title {
+      .book-title {
         font-size: 36px;
         font-weight: bold;
         font-family: Raleway, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
       }
-      & .book-author {
+      .book-author {
         font-size: 16px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
-        & span {
+        span {
           color: black;
         }
       }
-      & .book-year {
+      .book-year {
         font-size: 16px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
       }
-      & .rating {
+      .rating {
         margin-top: 4px;
         margin-bottom: 7px;
       }
-      & .review-body {
+      .review-body {
         font-size: 16px;
         font-family: Inter, Arial, Helvetica, sans-serif;
       }
     }
-    & .card-menu {
+    .card-menu {
       padding: 15px 15px 15px 0;
-      & .menu-button,
-      & .love-button,
-      & .share-button {
+      .menu-button,
+      .love-button,
+      .share-button {
         width: 40px;
         height: 40px;
       }
     }
   }
 `;
-
-function BookCard({ user, book, activity, time, review, quote }) {
-  return (
-    <Wrapper isQuote={quote}>
-      {!quote && (
-        <div className="card-img">
-          <img src={book.img} alt="placeholder" height="100%" width="100%" />
-        </div>
-      )}
-      {quote ? (
-        <div className="card-quote">
-          <div className="card-status">
-            {user.username} {activity} {moment(time).fromNow()}
-          </div>
-          <div className="quote-body">{quote.body}</div>
-          <div className="quoted-from">
-            From <span>{book.title}</span>
-          </div>
-        </div>
-      ) : (
-        <div className="card-desc">
-          <div className="card-status">
-            {user.username} {activity} {moment(time).fromNow()}
-          </div>
-          <div className="book-title">{book.title}</div>
-          {review ? (
-            <>
-              <div className="rating">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bx-star"></i>
-                <i className="bx bx-star"></i>
-              </div>
-              <div className="review-body">{review.body}</div>
-            </>
-          ) : (
-            <>
-              <div className="book-author">
-                by <span>{book.author}</span>
-              </div>
-              <div className="book-year">{book.year}</div>
-            </>
-          )}
-        </div>
-      )}
-      <div className="card-menu">
-        <div className="menu-button">
-          <img src={dotsMenu} alt="" />
-        </div>
-        <div className="love-button">
-          <img src={addToLibrary} alt="" />
-        </div>
-        <div className="share-button">
-          <img src={share} alt="" />
-        </div>
-      </div>
-    </Wrapper>
-  );
-}
-
-export default BookCard;
