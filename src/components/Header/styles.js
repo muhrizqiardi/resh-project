@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import colorPalette from "../constants/colorPalette";
+import colorPalette from "../../constants/colorPalette";
 
-const Wrapper = styled.header`
+export const HeaderWrapper = styled.header`
   max-width: 772px;
   height: 56px;
   margin: 0 auto;
@@ -48,23 +48,3 @@ const Wrapper = styled.header`
     }
   }
 `;
-
-function Header({ title, leftIcon, leftAction, rightIcon, rightAction }) {
-  return (
-    <Wrapper
-      leftActionAvailable={Boolean(leftAction)}
-      rightActionAvailable={Boolean(rightAction)}
-    >
-      <div onClick={leftAction} className="left-action">
-        <div className="left-action-icon">{leftIcon}</div>
-      </div>
-      <div className="header-content">
-        <h1>{title}</h1>
-      </div>
-      <div onClick={rightAction} className="right-action">
-        <div className="left-action-icon">{rightIcon}</div>
-      </div>
-    </Wrapper>
-  );
-}
-export default Header;
