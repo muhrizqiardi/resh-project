@@ -6,6 +6,7 @@ import Library from "./pages/library";
 import Profile from "./pages/profile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SignIn from "./pages/signin";
 
 function App() {
   const history = useHistory();
@@ -19,6 +20,9 @@ function App() {
 
   return (
     <Switch>
+      <Route path="/signin">
+        <SignIn />
+      </Route>
       <Route path="/feed">
         <Feed />
       </Route>
