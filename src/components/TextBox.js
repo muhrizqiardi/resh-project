@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
+import colorPalette from "../constants/colorPalette";
 
 const Textbox = styled.input`
   font-family: Inter, Arial, Helvetica, sans-serif; 

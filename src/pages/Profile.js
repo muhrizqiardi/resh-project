@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ButtonNormal, {ButtonPrimary} from "../components/Button"
+import { ButtonNormal, ButtonPrimary } from "../components/Button";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ function Profile(props) {
         venenatis lobortis mi.
       </p>
       <ButtonPrimary>Profile Settings</ButtonPrimary>
-      <ButtonNormal style={{margin: "10px 0"}}>Log Out</ButtonNormal>
+      <ButtonNormal style={{ margin: "10px 0" }}>Log Out</ButtonNormal>
     </Wrapper>
   );
 }

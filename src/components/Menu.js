@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
+import colorPalette from "../constants/colorPalette";
 
 const Wrapper = styled.div`
   /* Mobile */

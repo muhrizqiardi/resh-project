@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
+import colorPalette from "../constants/colorPalette";
 
 const Wrapper = styled.header`
   max-width: 772px;

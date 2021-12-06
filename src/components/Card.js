@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import colorPalette from "../variables/colorPalette";
+import colorPalette from "../constants/colorPalette";
 import dotsMenu from "../assets/dots-menu.svg";
 import addToLibrary from "../assets/add-to-library.svg";
 import share from "../assets/share.svg";
