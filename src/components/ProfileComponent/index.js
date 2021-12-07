@@ -4,9 +4,11 @@ import { Wrapper } from "./styles";
 import { useSelector } from "react-redux";
 import supabase from "../../configs/supabase";
 import emptyProfilePicture from "../../assets/empty-profile-picture.png";
+import { useHistory } from "react-router";
 
 export default function ProfileComponent(props) {
   const auth = useSelector(({ auth }) => auth);
+  const history = useHistory();
   return (
     <Wrapper>
       <div className="profile-avatar">
@@ -26,7 +28,10 @@ export default function ProfileComponent(props) {
       <ButtonPrimary>Profile Settings</ButtonPrimary>
       <ButtonNormal
         style={{ margin: "10px 0" }}
-        onClick={() => supabase.auth.signOut()}
+        onClick={() => {
+          supabase.auth.signOut();
+          window.location = "/";
+        }}
       >
         Log Out
       </ButtonNormal>

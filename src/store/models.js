@@ -5,7 +5,7 @@ export const auth = {
   state: {
     signedIn: false,
     accountCreated: false,
-    loading: false,
+    loading: true,
     magicLinkSent: false,
     error: null,
     session: null,
@@ -53,23 +53,19 @@ export const auth = {
     },
 
     async handleSession(payload, rootState) {
-      dispatch.auth.setLoading(true);
+      if (!rootState.auth.loading) dispatch.auth.setLoading(true);
       const session = supabase.auth.session();
-
-      dispatch.auth.setSession(session);
-
-      const { data: listener } = supabase.auth.onAuthStateChange(
-        (_event, session) => {
-          dispatch.auth.setSession(session);
-          dispatch.auth.getUser();
-        }
-      );
-      dispatch.auth.setLoading(false);
+      if (session) {
+        dispatch.auth.setSession(session);
+        dispatch.auth.getUser();
+      } else {
+        dispatch.auth.setLoading(false);
+      }
     },
 
     async getUser(payload, rootState) {
       try {
-        dispatch.auth.setLoading(true);
+        if (!rootState.auth.loading) dispatch.auth.setLoading(true);
         console.log("rootState", rootState);
         const { email } = rootState.auth.session.user;
         const { data, error, status } = await supabase
@@ -82,13 +78,12 @@ export const auth = {
           console.log("account is created, redirecting");
           dispatch.auth.setAccountCreated(true);
           dispatch.auth.setUser(data[0]);
+          dispatch.auth.setLoading(false);
         } else {
           console.error("account isn't created");
         }
       } catch (error) {
         console.error("query error", error);
-      } finally {
-        dispatch.auth.setLoading(false);
       }
     },
 

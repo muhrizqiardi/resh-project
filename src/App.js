@@ -10,6 +10,7 @@ import CreateAccount from "./pages/createaccount";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
 import supabase from "./configs/supabase";
+import Books from "./pages/books";
 
 function App() {
   const auth = useSelector(({ auth }) => auth);
@@ -17,20 +18,17 @@ function App() {
 
   useEffect(() => {
     dispatch.auth.handleSession();
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        dispatch.auth.handleSession();
+      }
+    );
   }, []);
-
-  console.log("why isnt it working!?!!?!?!?!?", auth.session);
 
   return auth.loading ? (
     <></>
   ) : (
     <Switch>
-      {/* {auth.session ? <></> : <Redirect to="/signin" />} */}
-      {/* <ProtectedRoute exact path="/" component={<Redirect to="/feed" />} />
-      <ProtectedRoute path="/feed" component={Feed} />
-      <ProtectedRoute path="/search" component={Search} />
-      <ProtectedRoute path="/library" component={Library} />
-      <ProtectedRoute path="/me" component={Profile} /> */}
       <Route
         path="/createaccount"
         render={(props) =>
@@ -86,6 +84,22 @@ function App() {
           auth.session !== null ? (
             auth.accountCreated ? (
               <Library />
+            ) : (
+              <Redirect to="/createaccount" />
+            )
+          ) : (
+            <Redirect to="/signin" />
+          )
+        }
+      />
+      <Route
+        path="/books/:googleBooksVolumeId"
+        render={(props) =>
+          auth.session !== null ? (
+            auth.accountCreated ? (
+              <Books
+                googleBooksVolumeId={props.match.params.googleBooksVolumeId}
+              />
             ) : (
               <Redirect to="/createaccount" />
             )
