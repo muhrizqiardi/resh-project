@@ -173,11 +173,16 @@ export const BookCardWrapper = styled.article`
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
       }
-      .book-title {
+      .book-title a {
+        text-decoration: none;
+        color: inherit;
         font-size: 36px;
         font-weight: bold;
         font-family: Raleway, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
+        &:hover {
+          text-decoration: underline;
+        }
       }
       .book-author {
         font-size: 16px;
