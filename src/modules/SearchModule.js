@@ -36,6 +36,7 @@ export function SearchModule(props) {
         searchResult.map((result) => (
           <BookCard
             key={result.id}
+            googleBooksVolumeId={result.id}
             user={{
               username: "muhrizqiardi",
               name: {
