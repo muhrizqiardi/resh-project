@@ -16,20 +16,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const session = supabase.auth.session();
-
-    dispatch.auth.setSession(session);
-    dispatch.auth.getUser();
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        dispatch.auth.setSession(session);
-      }
-    );
-
-    return () => {
-      listener.unsubscribe();
-    };
+    dispatch.auth.handleSession();
   }, []);
 
   console.log("why isnt it working!?!!?!?!?!?", auth.session);
@@ -126,12 +113,12 @@ function App() {
         render={(props) =>
           auth.session !== null ? (
             auth.accountCreated ? (
-              <SignIn />
+              <Redirect to="/feed" />
             ) : (
               <Redirect to="/createaccount" />
             )
           ) : (
-            <Redirect to="/signin" />
+            <SignIn />
           )
         }
       />

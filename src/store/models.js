@@ -52,6 +52,21 @@ export const auth = {
       dispatch.auth.setLoading(false);
     },
 
+    async handleSession(payload, rootState) {
+      dispatch.auth.setLoading(true);
+      const session = supabase.auth.session();
+
+      dispatch.auth.setSession(session);
+
+      const { data: listener } = supabase.auth.onAuthStateChange(
+        (_event, session) => {
+          dispatch.auth.setSession(session);
+          dispatch.auth.getUser();
+        }
+      );
+      dispatch.auth.setLoading(false);
+    },
+
     async getUser(payload, rootState) {
       try {
         dispatch.auth.setLoading(true);
@@ -64,8 +79,11 @@ export const auth = {
         console.log("query data", data);
         if (error && status !== 406) throw error;
         if (data.length > 0) {
+          console.log("account is created, redirecting");
           dispatch.auth.setAccountCreated(true);
           dispatch.auth.setUser(data[0]);
+        } else {
+          console.error("account isn't created");
         }
       } catch (error) {
         console.error("query error", error);

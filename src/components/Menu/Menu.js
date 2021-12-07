@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
 import { MenuWrapper } from "./styles";
+import { useSelector } from "react-redux";
+import emptyProfilePicture from "../../assets/empty-profile-picture.png";
 
 export function Menu({
   closed,
@@ -9,6 +11,7 @@ export function Menu({
   libraryMenuOnClick,
   profileMenuOnClick,
 }) {
+  const auth = useSelector(({ auth }) => auth);
   const location = useLocation();
   const [isClosed, setIsClosed] = useState(closed);
   return (
@@ -65,13 +68,15 @@ export function Menu({
       >
         <div className="profile-avatar">
           <img
-            src="https://thispersondoesnotexist.com/image"
+            src={auth.user?.avatar_url ?? emptyProfilePicture}
             width={25}
             height={25}
             alt=""
           />
         </div>
-        <p className="profile-name">Name McName</p>
+        <p className="profile-name">
+          {auth.user.first_name} {auth.user.last_name}
+        </p>
       </div>
     </MenuWrapper>
   );
