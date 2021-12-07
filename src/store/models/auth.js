@@ -1,7 +1,7 @@
-import supabase from "../configs/supabase";
+import supabase from "../../configs/supabase";
 import _ from "lodash";
 
-export const auth = {
+export default auth = {
   state: {
     signedIn: false,
     accountCreated: false,
