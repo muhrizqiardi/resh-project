@@ -23,7 +23,7 @@ export function BookCard({ user, googleBooksVolumeId, activity, time, review, qu
   }
 
   useEffect(() => {
-    getBookData();
+    if (!quote) getBookData();
   }, []);
 
   if (quote) {
