@@ -11,10 +11,9 @@ export function SearchModule(props) {
   async function getSearchResult() {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_MOCK_API_URL}/feed`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`
       );
-      console.log(response.data);
-      setSearchResult(response.data);
+      setSearchResult(response.data.items);
     } catch (error) {
       console.error(error);
     }
@@ -28,13 +27,15 @@ export function SearchModule(props) {
     <>
       <Textbox
         placeholder="Search title or ISBN"
-        onChange={(event) => setSearchQuery(event.target.value)}
+        onKeyPress={(event) => {
+          if (event.key == "Enter") setSearchQuery(event.target.value);
+        }}
       />
 
       {searchQuery ? (
         searchResult.map((result) => (
           <BookCard
-            key={result.ISBN}
+            key={result.id}
             user={{
               username: "muhrizqiardi",
               name: {
@@ -43,8 +44,6 @@ export function SearchModule(props) {
               },
             }}
             book={result}
-            activity="added to library"
-            time="2021-09-22T00:48:00.000Z"
           />
         ))
       ) : (

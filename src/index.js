@@ -16,13 +16,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <GlobalStyle />
     <Provider store={store}>
       <Router>
         <App />
       </Router>
     </Provider>
-  </React.StrictMode>,
+  </>
+  ,
   document.getElementById("root")
 );

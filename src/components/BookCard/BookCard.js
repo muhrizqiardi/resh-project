@@ -3,13 +3,19 @@ import addToLibrary from "../../assets/add-to-library.svg";
 import share from "../../assets/share.svg";
 import moment from "moment";
 import { BookCardWrapper } from "./styles";
+import { Link } from "react-router-dom";
 
 export function BookCard({ user, book, activity, time, review, quote }) {
   return (
     <BookCardWrapper isQuote={quote}>
       {!quote && (
         <div className="card-img">
-          <img src={book.img} alt="placeholder" height="100%" width="100%" />
+          <img
+            src={book.volumeInfo.imageLinks.thumbnail ?? ""}
+            alt="placeholder"
+            height="100%"
+            width="100%"
+          />
         </div>
       )}
       {quote ? (
@@ -27,7 +33,7 @@ export function BookCard({ user, book, activity, time, review, quote }) {
           <div className="card-status">
             {user.username} {activity} {moment(time).fromNow()}
           </div>
-          <div className="book-title">{book.title}</div>
+          <div className="book-title"><Link to={`/books/${book.id}`}>{book.volumeInfo.title}</Link></div>
           {review ? (
             <>
               <div className="rating">
@@ -42,7 +48,10 @@ export function BookCard({ user, book, activity, time, review, quote }) {
           ) : (
             <>
               <div className="book-author">
-                by <span>{book.author}</span>
+                by{" "}
+                <span>
+                  {book.volumeInfo.authors ?? "-"}
+                </span>
               </div>
               <div className="book-year">{book.year}</div>
             </>
