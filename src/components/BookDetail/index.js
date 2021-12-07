@@ -29,6 +29,9 @@ function BookDetail({googleBooksVolumeId}) {
 
   return book ? (
     <Wrapper>
+      <div className="disclaimer">
+        This page is fetched from Google Books API
+      </div>
       <div className="book-info">
         <div className="card-img">
           <img

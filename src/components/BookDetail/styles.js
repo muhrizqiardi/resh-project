@@ -2,6 +2,15 @@ import styled from "styled-components";
 import colorPalette from "../../constants/colorPalette";
 
 export const Wrapper = styled.article`
+  .disclaimer {
+    padding: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: ${colorPalette.primaryDark};
+  }
+
   .book-info {
     display: grid;
     grid-template-columns: 80px 1fr 60px;
@@ -203,6 +212,10 @@ export const Wrapper = styled.article`
       }
     }
     article.book-description {
+      padding: 15px 15px;
+      font-size: 14px;
+    }
+    .reviews {
       padding: 15px 15px;
       font-size: 14px;
     }
