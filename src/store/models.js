@@ -4,6 +4,7 @@ import _ from "lodash";
 export const auth = {
   state: {
     signedIn: false,
+    accountCreated: false,
     loading: false,
     magicLinkSent: false,
     error: null,
@@ -15,11 +16,14 @@ export const auth = {
     setLoading(state, payload) {
       return _.cloneDeep({ ...state, loading: payload });
     },
+    setAccountCreated(state, payload) {
+      return _.cloneDeep({ ...state, accountCreated: payload });
+    },
     setError(state, payload) {
       return _.cloneDeep({ ...state, error: payload });
     },
     setSession(state, payload) {
-      console.log({"the session": payload});
+      console.log({ "the session": payload });
       return _.cloneDeep({ ...state, session: payload });
     },
     setMagicLinkSent(state, payload) {
@@ -27,6 +31,9 @@ export const auth = {
     },
     setSignedIn(state, payload) {
       return _.cloneDeep({ ...state, signedIn: payload });
+    },
+    setUser(state, payload) {
+      return _.cloneDeep({ ...state, user: payload });
     },
   },
 
@@ -43,6 +50,28 @@ export const auth = {
         console.error("Error happened while trying to sign in: ", error);
       }
       dispatch.auth.setLoading(false);
+    },
+
+    async getUser(payload, rootState) {
+      try {
+        dispatch.auth.setLoading(true);
+        console.log("rootState", rootState);
+        const { email } = rootState.auth.session.user;
+        const { data, error, status } = await supabase
+          .from("user")
+          .select()
+          .eq("email", email);
+        console.log("query data", data);
+        if (error && status !== 406) throw error;
+        if (data.length > 0) {
+          dispatch.auth.setAccountCreated(true);
+          dispatch.auth.setUser(data[0]);
+        }
+      } catch (error) {
+        console.error("query error", error);
+      } finally {
+        dispatch.auth.setLoading(false);
+      }
     },
 
     // TODO: handle sign out

@@ -1,5 +1,7 @@
 import { ButtonNormal, ButtonPrimary } from "../Button";
+import { useDispatch } from "react-redux";
 import { Wrapper } from "./styles";
+import supabase from "../../configs/supabase";
 
 export default function ProfileComponent(props) {
   return (
@@ -17,7 +19,7 @@ export default function ProfileComponent(props) {
         venenatis lobortis mi.
       </p>
       <ButtonPrimary>Profile Settings</ButtonPrimary>
-      <ButtonNormal style={{ margin: "10px 0" }}>Log Out</ButtonNormal>
+      <ButtonNormal style={{ margin: "10px 0" }} onClick={() => supabase.auth.signOut()}>Log Out</ButtonNormal>
     </Wrapper>
   );
 }
