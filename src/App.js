@@ -97,7 +97,9 @@ function App() {
         render={(props) =>
           auth.session !== null ? (
             auth.accountCreated ? (
-              <Books />
+              <Books
+                googleBooksVolumeId={props.match.params.googleBooksVolumeId}
+              />
             ) : (
               <Redirect to="/createaccount" />
             )
