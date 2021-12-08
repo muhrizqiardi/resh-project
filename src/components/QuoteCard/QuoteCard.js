@@ -49,7 +49,9 @@ export function QuoteCard({ googleBooksVolumeId, activityData }) {
           {activityData.username} {activityData.activity_type}{" "}
           {moment(activityData.occured_at).fromNow()}
         </div>
-        <div className="quote-body">{activityData.activity_attribute.quote.body}</div>
+        <div className="quote-body">
+          {activityData.activity_attribute.quote.body}
+        </div>
         <div className="quoted-from">
           From <span>{bookData.volumeInfo.title}</span>
         </div>
@@ -94,21 +96,20 @@ export function QuoteCard({ googleBooksVolumeId, activityData }) {
 
 export const QuoteCardSkeleton = () => (
   <QuoteCardSkeletonWrapper>
-    <div className="card-img">
-      <div className="img-placeholder"></div>
-    </div>
-    <div className="card-desc">
+    <div className="card-quote">
       <div className="card-status">
         <span className="card-status-placeholder"></span>
       </div>
-      <div className="book-title">
-        <span className="book-title-placeholder"></span>
+      <div className="quote-body">
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
       </div>
-      <div className="book-author">
-        <span className="book-author-placeholder"></span>
-      </div>
-      <div className="book-year">
-        <span className="book-year-placeholder"></span>
+      <div className="quoted-from">
+        <span className="quoted-from-placeholder"></span>
       </div>
     </div>
     <div className="card-menu">

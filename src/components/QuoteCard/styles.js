@@ -249,73 +249,59 @@ export const QuoteCardSkeletonWrapper = styled.div`
       border-radius: 7px;
     }
   }
-  .card-desc {
+  .card-quote {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
     .card-status {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
-      span {
-        width: 20%;
+      .card-status-placeholder {
         display: inline-block;
-        height: 12px;
-        background: lightgray;
-        border-radius: 10px;
+        height: 11px;
+        width: 100px;
+        border-radius: 16px;
+        margin-bottom: 8px;
+        background-color: lightgray;
       }
     }
-    .book-title {
+    .quote-body {
       font-size: 16px;
       font-weight: bold;
       font-family: Raleway, Arial, Helvetica, sans-serif;
       margin-bottom: 5px;
-      span {
-        width: 100%;
+      .quote-body-placeholder {
         display: inline-block;
         height: 16px;
-        background: lightgray;
-        border-radius: 10px;
+        width: 100%;
+        border-radius: 16px;
+        margin-bottom: 8px;
+        background-color: lightgray;
       }
     }
-    .book-author {
+    .quoted-from {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
-      margin-bottom: 5px;
-      span.book-author-placeholder {
-        width: 10%;
+      margin-top: 5px;
+      span.quoted-from-placeholder {
         display: inline-block;
         height: 11px;
-        background: lightgray;
-        border-radius: 10px;
+        width: 100px;
+        border-radius: 16px;
+        margin-bottom: 8px;
+        background-color: lightgray;
       }
       span {
         color: black;
       }
     }
-    .book-year {
-      font-size: 11px;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      margin-bottom: 5px;
-      span {
-        width: 50px;
-        display: inline-block;
-        height: 12px;
-        background: lightgray;
-        border-radius: 10px;
-      }
-    }
-    .rating {
-      margin-top: 4px;
-      margin-bottom: 7px;
-    }
-    .review-body {
-      font-size: 11px;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-    }
   }
   .card-menu {
     padding: 10px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -364,18 +350,42 @@ export const QuoteCardSkeletonWrapper = styled.div`
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
+        .card-status-placeholder {
+          display: inline-block;
+          height: 12px;
+          width: 220px;
+          border-radius: 16px;
+          margin-bottom: 8px;
+          background-color: lightgray;
+        }
       }
       .quote-body {
         font-size: 24px;
         font-weight: bold;
         font-family: Raleway, Arial, Helvetica, sans-serif;
         margin-bottom: 5px;
+        .quote-body-placeholder {
+          display: inline-block;
+          height: 24px;
+          width: 100%;
+          border-radius: 16px;
+          margin-bottom: 8px;
+          background-color: lightgray;
+        }
       }
       .quoted-from {
         font-size: 14px;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: ${colorPalette.secondary.rgb()};
         margin-bottom: 5px;
+        span.quoted-from-placeholder {
+          display: inline-block;
+          height: 14px;
+          width: 100px;
+          border-radius: 16px;
+          margin-bottom: 8px;
+          background-color: lightgray;
+        }
         span {
           color: black;
         }
@@ -444,6 +454,7 @@ export const QuoteCardSkeletonWrapper = styled.div`
     }
     .card-menu {
       padding: 15px 15px 15px 0;
+      height: 180px;
       .menu-button,
       .action-button,
       .share-button {
