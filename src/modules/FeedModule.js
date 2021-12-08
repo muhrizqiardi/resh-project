@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ActivityCard } from "../components/ActivityCard/ActivityCard";
 import BookCard from "../components/BookCard";
 import { BookCardSkeleton } from "../components/BookCard/BookCard";
 
@@ -34,7 +35,7 @@ export function FeedModule(props) {
   ) : (
     <>
       {feed.map((item) => (
-        <BookCard key={item.activity_id} {...item} />
+        <ActivityCard key={item.activityData.activity_id} {...item} />
       ))}
     </>
   );
