@@ -131,11 +131,19 @@ export const ReviewCardSkeleton = () => (
       <div className="book-title">
         <span className="book-title-placeholder"></span>
       </div>
-      <div className="book-author">
-        <span className="book-author-placeholder"></span>
+      <div className="rating">
+        <span className="rating-placeholder"></span>
+        <span className="rating-placeholder"></span>
+        <span className="rating-placeholder"></span>
+        <span className="rating-placeholder"></span>
+        <span className="rating-placeholder"></span>
       </div>
-      <div className="book-year">
-        <span className="book-year-placeholder"></span>
+      <div className="review-body">
+        <span className="review-body-placeholder"></span>
+        <span className="review-body-placeholder"></span>
+        <span className="review-body-placeholder"></span>
+        <span className="review-body-placeholder"></span>
+        <span className="review-body-placeholder"></span>
       </div>
     </div>
     <div className="card-menu">

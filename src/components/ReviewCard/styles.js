@@ -315,13 +315,30 @@ export const ReviewCardSkeletonWrapper = styled.div`
     .rating {
       margin-top: 4px;
       margin-bottom: 7px;
+      span.rating-placeholder {
+        height: 24px;
+        width: 24px;
+        background-color: lightgray;
+        border-radius: 100%;
+        margin-right: 3px;
+        display: inline-block;
+      }
     }
     .review-body {
       font-size: 11px;
       font-family: Inter, Arial, Helvetica, sans-serif;
+      span {
+        width: 100%;
+        display: inline-block;
+        height: 16px;
+        margin-bottom: 7px;
+        background: lightgray;
+        border-radius: 10px;
+      }
     }
   }
   .card-menu {
+    height: 120px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -442,11 +459,19 @@ export const ReviewCardSkeletonWrapper = styled.div`
       }
       .rating {
         margin-top: 4px;
-        margin-bottom: 7px;
+        margin-bottom: 15px;
       }
       .review-body {
         font-size: 16px;
         font-family: Inter, Arial, Helvetica, sans-serif;
+        span {
+          width: 100%;
+          display: inline-block;
+          height: 16px;
+          margin-bottom: 7px;
+          background: lightgray;
+          border-radius: 10px;
+        }
       }
     }
     .card-menu {
