@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { library } from "../../store/models";
 import { find } from "lodash";
+import BookCardPopper from "./BookCardPopper";
 
 export function BookCard({
   user,
@@ -26,9 +27,13 @@ export function BookCard({
   }));
   const dispatch = useDispatch();
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
+
   const libraryData = find(library.library, {
     google_books_volume_id: googleBooksVolumeId,
-  });
+  }) ?? false;
 
   async function getBookData() {
     try {
@@ -112,9 +117,18 @@ export function BookCard({
           )}
         </div>
         <div className="card-menu">
-          <div className="menu-button">
+          <button
+            className="menu-button"
+            onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget);
+            }}
+          >
             <img src={dotsMenu} alt="" />
-          </div>
+          </button>
+          <BookCardPopper
+            anchorEl={anchorEl}
+            library_item_id={libraryData.library_item_id}
+          />
           <div
             className="action-button"
             onClick={() => {
@@ -125,7 +139,13 @@ export function BookCard({
             }}
           >
             {libraryData ? (
-              <img src={startReadingIcon} />
+              libraryData.started_reading ? (
+                `${Math.round(
+                  (book.volumeInfo.pageCount / libraryData.current_page) * 100
+                )}%`
+              ) : (
+                <img src={startReadingIcon} />
+              )
             ) : (
               <img src={addToLibraryIcon} alt="" />
             )}
