@@ -4,6 +4,7 @@ import BookCard from "../components/BookCard";
 import Textbox from "../components/TextBox";
 import noSearchQueryImg from "../assets/no-search-query.png";
 import { SearchItemCard } from "../components/SearchItemCard/SearchItemCard";
+import { Helmet } from "react-helmet";
 
 export function SearchModule(props) {
   const [searchResult, setSearchResult] = useState([]);
@@ -26,6 +27,10 @@ export function SearchModule(props) {
 
   return (
     <>
+      <Helmet>
+        <title>Search {searchQuery && `for "${searchQuery}" `}| RESH</title>
+      </Helmet>
+
       <Textbox
         placeholder="Search title or ISBN"
         onKeyPress={(event) => {
@@ -35,10 +40,7 @@ export function SearchModule(props) {
 
       {searchQuery ? (
         searchResult.map((result) => (
-          <SearchItemCard
-            key={result.id}
-            googleBooksVolumeId={result.id}
-          />
+          <SearchItemCard key={result.id} googleBooksVolumeId={result.id} />
         ))
       ) : (
         <>

@@ -3,11 +3,15 @@ import Menu from "../../components/Menu";
 import ProfileComponent from "../../components/ProfileComponent"
 import { Wrapper, Content, Container, Main } from "./styles";
 import { useHistory } from "react-router";
+import { Helmet } from "react-helmet";
 
 function Profile(props) {
   const history = useHistory();
   return (
     <Wrapper>
+      <Helmet>
+        <title>Profile | RESH</title>
+      </Helmet>
       <Menu
         feedMenuOnClick={() => history.push("/feed")}
         searchMenuOnClick={() => history.push("/search")}
