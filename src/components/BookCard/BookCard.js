@@ -3,7 +3,7 @@ import addToLibraryIcon from "../../assets/add-to-library.svg";
 import startReadingIcon from "../../assets/start-reading.svg";
 import share from "../../assets/share.svg";
 import moment from "moment";
-import { BookCardWrapper } from "./styles";
+import { BookCardSkeletonWrapper, BookCardWrapper } from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -136,7 +136,34 @@ export function BookCard({
         </div>
       </BookCardWrapper>
     ) : (
-      <></>
+      <BookCardSkeleton />
     );
   }
 }
+
+export const BookCardSkeleton = () => (
+  <BookCardSkeletonWrapper>
+    <div className="card-img">
+      <div className="img-placeholder"></div>
+    </div>
+    <div className="card-desc">
+      <div className="card-status">
+        <span className="card-status-placeholder"></span>
+      </div>
+      <div className="book-title">
+        <span className="book-title-placeholder"></span>
+      </div>
+      <div className="book-author">
+        <span className="book-author-placeholder"></span>
+      </div>
+      <div className="book-year">
+        <span className="book-year-placeholder"></span>
+      </div>
+    </div>
+    <div className="card-menu">
+      <div className="menu-button"></div>
+      <div className="action-button"></div>
+      <div className="share-button"></div>
+    </div>
+  </BookCardSkeletonWrapper>
+);
