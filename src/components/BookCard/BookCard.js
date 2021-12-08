@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { library } from "../../store/models";
 import { find } from "lodash";
+import BookCardPopper from "./BookCardPopper";
 
 export function BookCard({
   user,
@@ -25,6 +26,10 @@ export function BookCard({
     library: state.library,
   }));
   const dispatch = useDispatch();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
 
   const libraryData = find(library.library, {
     google_books_volume_id: googleBooksVolumeId,
@@ -112,9 +117,15 @@ export function BookCard({
           )}
         </div>
         <div className="card-menu">
-          <div className="menu-button">
+          <button
+            className="menu-button"
+            onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget);
+            }}
+          >
             <img src={dotsMenu} alt="" />
-          </div>
+          </button>
+          <BookCardPopper anchorEl={anchorEl} />
           <div
             className="action-button"
             onClick={() => {
