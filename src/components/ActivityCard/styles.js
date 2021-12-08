@@ -56,7 +56,9 @@ export const ActivityCardWrapper = styled.article`
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
     }
-    .book-title {
+    .book-title a {
+      color: black;
+      text-decoration: none;
       font-size: 16px;
       font-weight: bold;
       font-family: Raleway, Arial, Helvetica, sans-serif;
@@ -67,6 +69,7 @@ export const ActivityCardWrapper = styled.article`
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
+      margin-top: 5px;
       span {
         color: black;
       }

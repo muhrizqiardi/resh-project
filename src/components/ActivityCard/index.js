@@ -1,2 +1,2 @@
-import { BookCard } from "./BookCard";
-export default BookCard;
+import { ActivityCard } from "./ActivityCard";
+export default ActivityCard;

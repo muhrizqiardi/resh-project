@@ -2,17 +2,16 @@ import styled from "styled-components";
 import colorPalette from "../../constants/colorPalette";
 import Color from "color";
 
-export const ReviewCardWrapper = styled.article`
+export const QuoteCardWrapper = styled.article`
   /* Mobile */
   box-sizing: content-box;
   width: 100%;
   min-height: 120px;
-  /* ${(props) => (props.isQuote ? "" : "height: 120px;")} */
   background-color: white;
   border: 3px solid ${colorPalette.primaryDark.rgb()};
   border-radius: 15px;
   display: grid;
-  grid-template-columns: ${(props) => (!props.isQuote ? "80px" : "")} 1fr 60px;
+  grid-template-columns: 1fr 60px;
   .card-img {
     padding: 10px 0 10px 10px;
     img {
@@ -56,9 +55,7 @@ export const ReviewCardWrapper = styled.article`
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
     }
-    .book-title a {
-      color: black;
-      text-decoration: none;
+    .book-title {
       font-size: 16px;
       font-weight: bold;
       font-family: Raleway, Arial, Helvetica, sans-serif;
@@ -69,8 +66,6 @@ export const ReviewCardWrapper = styled.article`
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: ${colorPalette.secondary.rgb()};
       margin-bottom: 5px;
-      margin-top: 5px;
-
       span {
         color: black;
       }
@@ -134,11 +129,9 @@ export const ReviewCardWrapper = styled.article`
   /* Desktop */
   @media (min-width: 768px) {
     max-width: 765px;
-    /* ${(props) =>
-      props.isQuote ? "min-height: 180px;" : "height: 180px;"} */
     min-height: 180px;
     border-radius: 30px;
-    grid-template-columns: ${(props) => (!props.isQuote ? "115px" : "")} 1fr 60px;
+    grid-template-columns: 1fr 60px;
     &:hover {
       background-color: ${Color("#ffffff").darken(0.04).rgb()};
     }
@@ -229,7 +222,7 @@ export const ReviewCardWrapper = styled.article`
   }
 `;
 
-export const ReviewCardSkeletonWrapper = styled.div`
+export const QuoteCardSkeletonWrapper = styled.div`
   @keyframes pulse {
     from {
       filter: brightness(1);
@@ -246,7 +239,7 @@ export const ReviewCardSkeletonWrapper = styled.div`
   border: 3px solid lightgray;
   border-radius: 15px;
   display: grid;
-  grid-template-columns: ${(props) => (!props.isQuote ? "80px" : "")} 1fr 60px;
+  grid-template-columns: 1fr 60px;
   .card-img {
     padding: 10px 0 10px 10px;
     .img-placeholder {
@@ -355,7 +348,7 @@ export const ReviewCardSkeletonWrapper = styled.div`
     max-width: 765px;
     min-height: 180px;
     border-radius: 30px;
-    grid-template-columns: ${(props) => (!props.isQuote ? "115px" : "")} 1fr 60px;
+    grid-template-columns: 1fr 60px;
     .card-img {
       padding: 15px 0 15px 15px;
       .img-placeholder {
@@ -450,7 +443,6 @@ export const ReviewCardSkeletonWrapper = styled.div`
       }
     }
     .card-menu {
-      height: 180px;
       padding: 15px 15px 15px 0;
       .menu-button,
       .action-button,
