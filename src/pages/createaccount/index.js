@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import supabase from "../../configs/supabase";
 import { useHistory, Redirect } from "react-router";
+import { Helmet } from "react-helmet";
 
 function CreateAccount(props) {
   const history = useHistory();
@@ -24,6 +25,9 @@ function CreateAccount(props) {
       <Redirect exact to="/" />
     ) : (
       <Wrapper>
+        <Helmet>
+          <title>Create your Account | RESH</title>
+        </Helmet>
         <Header>
           <img src={logoText} alt="Logo" />
         </Header>

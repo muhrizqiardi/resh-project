@@ -3,12 +3,16 @@ import Menu from "../../components/Menu";
 import { Wrapper, Content, Container, Main } from "./styles";
 import { useHistory } from "react-router";
 import LibraryModule from "../../modules/LibraryModule";
+import { Helmet } from "react-helmet";
 
 function Library(props) {
   const history = useHistory();
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>Your Library | RESH</title>
+      </Helmet>
       <Menu
         feedMenuOnClick={() => history.push("/feed")}
         searchMenuOnClick={() => history.push("/search")}

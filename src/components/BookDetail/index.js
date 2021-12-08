@@ -7,6 +7,7 @@ import addToLibrary from "../../assets/add-to-library.svg";
 import share from "../../assets/share.svg";
 import { find } from "lodash";
 import DOMPurify from 'dompurify'
+import { Helmet } from "react-helmet";
 
 function BookDetail({googleBooksVolumeId}) {
   const [book, setBook] = useState();
@@ -29,6 +30,9 @@ function BookDetail({googleBooksVolumeId}) {
 
   return book ? (
     <Wrapper>
+      <Helmet>
+        <title>{book.volumeInfo.title} | RESH</title>
+      </Helmet>
       <div className="disclaimer">
         This page is fetched from Google Books API
       </div>
@@ -100,7 +104,9 @@ function BookDetail({googleBooksVolumeId}) {
       <div className="reviews">
         <h4 className="review-section-title">Reviews</h4>
         <article className="review-item">
-          <div className="reviewer-name"><span className="name-highlight">Name</span> reviewed</div>
+          <div className="reviewer-name">
+            <span className="name-highlight">Name</span> reviewed
+          </div>
           <div className="ratings">
             <i className="bx bxs-star"></i>
             <i className="bx bxs-star"></i>
@@ -108,7 +114,10 @@ function BookDetail({googleBooksVolumeId}) {
             <i className="bx bxs-star"></i>
           </div>
           <div className="rating-content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, hic natus. Necessitatibus reprehenderit repudiandae nesciunt explicabo voluptatem quisquam nobis ducimus culpa quis dolores magnam ratione, saepe deleniti magni at praesentium.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, hic
+            natus. Necessitatibus reprehenderit repudiandae nesciunt explicabo
+            voluptatem quisquam nobis ducimus culpa quis dolores magnam ratione,
+            saepe deleniti magni at praesentium.
           </div>
         </article>
       </div>
