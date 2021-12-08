@@ -21,12 +21,13 @@ const library = {
     },
     addToLibraryState(state, payload) {
       let newLibrary = [...state.library, payload];
-      console.log({newLibrary})
+      console.log({ newLibrary });
       return _.cloneDeep({ ...state, library: newLibrary });
     },
     removeFromLibraryState(state, payload) {
-      let newLibrary = _.remove(state.library, {
-        google_books_volume_id: payload,
+      let newLibrary = [...state.library]
+      _.remove(newLibrary, {
+        google_books_volume_id: payload.google_books_volume_id,
       });
       return _.cloneDeep({ ...state, library: newLibrary });
     },
@@ -59,6 +60,24 @@ const library = {
         if (data) {
           console.log("success", data);
           dispatch.library.addToLibraryState(data[0]);
+        }
+      } catch (error) {
+        console.error(error);
+        dispatch.library.setError(error);
+      } finally {
+        dispatch.library.setLoading(false);
+      }
+    },
+    async removeFromLibrary(payload, rootState) {
+      if (!rootState.loading) dispatch.library.setLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from("library_item")
+          .delete().match({ google_books_volume_id: payload.google_books_volume_id, username: payload.username });
+        if (error) throw error;
+        if (data) {
+          console.log("success", data);
+          dispatch.library.removeFromLibraryState(payload);
         }
       } catch (error) {
         console.error(error);

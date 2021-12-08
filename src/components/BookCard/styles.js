@@ -457,7 +457,7 @@ export const BookCardSkeletonWrapper = styled.div`
 
 export const PopperWrapper = styled.div`
   overflow: hidden;
-  width: 280px;
+  width: 220px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: 1px solid #171710;

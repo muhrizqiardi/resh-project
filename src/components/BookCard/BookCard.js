@@ -125,7 +125,7 @@ export function BookCard({
           >
             <img src={dotsMenu} alt="" />
           </button>
-          <BookCardPopper anchorEl={anchorEl} />
+          <BookCardPopper anchorEl={anchorEl} googleBooksVolumeId={googleBooksVolumeId} username={auth.user.username} />
           <div
             className="action-button"
             onClick={() => {
