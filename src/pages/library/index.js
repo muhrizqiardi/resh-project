@@ -2,6 +2,7 @@ import Header from "../../components/Header";
 import Menu from "../../components/Menu";
 import { Wrapper, Content, Container, Main } from "./styles";
 import { useHistory } from "react-router";
+import LibraryModule from "../../modules/LibraryModule";
 
 function Library(props) {
   const history = useHistory();
@@ -25,7 +26,9 @@ function Library(props) {
           }
         />
         <Content>
-          <Container></Container>
+          <Container>
+            <LibraryModule />
+          </Container>
         </Content>
       </Main>
     </Wrapper>

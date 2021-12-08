@@ -1,14 +1,34 @@
 import dotsMenu from "../../assets/dots-menu.svg";
-import addToLibrary from "../../assets/add-to-library.svg";
+import addToLibraryIcon from "../../assets/add-to-library.svg";
+import startReadingIcon from "../../assets/start-reading.svg";
 import share from "../../assets/share.svg";
 import moment from "moment";
 import { BookCardWrapper } from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { library } from "../../store/models";
+import { find } from "lodash";
 
-export function BookCard({ user, googleBooksVolumeId, activity, time, review, quote }) {
+export function BookCard({
+  user,
+  googleBooksVolumeId,
+  activity,
+  time,
+  review,
+  quote,
+}) {
   const [book, setBook] = useState();
+  const { auth, library } = useSelector((state) => ({
+    auth: state.auth,
+    library: state.library,
+  }));
+  const dispatch = useDispatch();
+
+  const libraryData = find(library.library, {
+    google_books_volume_id: googleBooksVolumeId,
+  });
 
   async function getBookData() {
     try {
@@ -43,7 +63,7 @@ export function BookCard({ user, googleBooksVolumeId, activity, time, review, qu
             <img src={dotsMenu} alt="" />
           </div>
           <div className="love-button">
-            <img src={addToLibrary} alt="" />
+            <img src={addToLibraryIcon} alt="" />
           </div>
           <div className="share-button">
             <img src={share} alt="" />
@@ -95,8 +115,20 @@ export function BookCard({ user, googleBooksVolumeId, activity, time, review, qu
           <div className="menu-button">
             <img src={dotsMenu} alt="" />
           </div>
-          <div className="love-button">
-            <img src={addToLibrary} alt="" />
+          <div
+            className="action-button"
+            onClick={() => {
+              dispatch.library.addToLibrary({
+                username: auth.user.username,
+                google_books_volume_id: googleBooksVolumeId,
+              });
+            }}
+          >
+            {libraryData ? (
+              <img src={startReadingIcon} />
+            ) : (
+              <img src={addToLibraryIcon} alt="" />
+            )}
           </div>
           <div className="share-button">
             <img src={share} alt="" />
