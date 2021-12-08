@@ -92,12 +92,14 @@ export const BookCardWrapper = styled.article`
     justify-content: space-between;
     align-items: end;
     .menu-button,
-    .love-button,
+    .action-button,
     .share-button {
       width: 30px;
       height: 30px;
       background-color: white;
       border-radius: 100%;
+      font-size: 12px;
+      font-weight: bold;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -210,7 +212,7 @@ export const BookCardWrapper = styled.article`
     .card-menu {
       padding: 15px 15px 15px 0;
       .menu-button,
-      .love-button,
+      .action-button,
       .share-button {
         width: 40px;
         height: 40px;

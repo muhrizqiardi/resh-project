@@ -23,6 +23,7 @@ function App() {
         dispatch.auth.handleSession();
       }
     );
+    dispatch.library.getLibrary()
   }, []);
 
   return auth.loading ? (
