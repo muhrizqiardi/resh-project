@@ -1,4 +1,3 @@
-import moment from "moment";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -9,7 +8,7 @@ import share from "../../assets/share.svg";
 import dotsMenu from "../../assets/dots-menu.svg";
 import startReadingIcon from "../../assets/start-reading.svg";
 
-export function LibraryItemCard({ user, googleBooksVolumeId, libraryData }) {
+export function LibraryItemCard({ googleBooksVolumeId, libraryData }) {
   const [googleBooksData, setGoogleBooksData] = useState();
   const dispatch = useDispatch();
   const { auth, library } = useSelector(({ auth, library }) => ({
