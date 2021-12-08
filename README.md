@@ -1,5 +1,9 @@
 # RESH: Read and Share!
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/24759065/145170436-cb0d8d41-b90a-4254-a857-3720d7eeffdf.png" height="240" width="240">
+</p>
+
 A web app for tracking your book reading progress, and also share your thoughts on a book! This project is powered by **Supabase**!
 
 ## Screenshots
