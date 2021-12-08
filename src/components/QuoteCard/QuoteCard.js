@@ -1,0 +1,121 @@
+import axios from "axios";
+import moment from "moment";
+import { find } from "lodash";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import MenuPopup from "./MenuPopup";
+import { QuoteCardSkeletonWrapper, QuoteCardWrapper } from "./styles";
+import share from "../../assets/share.svg";
+import dotsMenu from "../../assets/dots-menu.svg";
+import startReadingIcon from "../../assets/start-reading.svg";
+import addToLibraryIcon from "../../assets/add-to-library.svg";
+
+export function QuoteCard({ googleBooksVolumeId, activityData }) {
+  const [bookData, setBookData] = useState();
+  const dispatch = useDispatch();
+  const { library } = useSelector(({ library }) => ({ library }));
+  const libraryData =
+    find(library.library, { google_books_volume_id: googleBooksVolumeId }) ??
+    false;
+  const readingProgress = libraryData.started_reading
+    ? Math.round(bookData.volumeInfo.pageCount / libraryData.current_page)
+    : false;
+
+  console.log(googleBooksVolumeId, libraryData);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  async function getBookData() {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes/${googleBooksVolumeId}`
+      );
+      console.log("response for book", response.data);
+      setBookData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getBookData();
+  }, []);
+
+  return bookData ? (
+    <QuoteCardWrapper>
+      <div className="card-quote">
+        <div className="card-status">
+          {activityData.username} {activityData.activity_type}{" "}
+          {moment(activityData.occured_at).fromNow()}
+        </div>
+        <div className="quote-body">
+          {activityData.activity_attribute.quote.body}
+        </div>
+        <div className="quoted-from">
+          From <span>{bookData.volumeInfo.title}</span>
+        </div>
+      </div>
+      <div className="card-menu">
+        <button
+          className="menu-button"
+          onClick={(event) => {
+            setAnchorEl(anchorEl ? null : event.currentTarget);
+          }}
+        >
+          <img src={dotsMenu} alt="" />
+        </button>
+        <MenuPopup
+          anchorEl={anchorEl}
+          library_item_id={libraryData.library_item_id}
+        />
+        <button
+          className="action-button"
+          onClick={() => {
+            dispatch.library.addToLibrary({
+              username: activityData.username,
+              google_books_volume_id: googleBooksVolumeId,
+            });
+          }}
+        >
+          {libraryData && libraryData.started_reading && readingProgress * 100}
+          {libraryData && !libraryData.started_reading && (
+            <img src={startReadingIcon} />
+          )}
+          {!libraryData && <img src={addToLibraryIcon} />}
+        </button>
+        <button className="share-button">
+          <img src={share} alt="" />
+        </button>
+      </div>
+    </QuoteCardWrapper>
+  ) : (
+    <QuoteCardSkeleton />
+  );
+}
+
+export const QuoteCardSkeleton = () => (
+  <QuoteCardSkeletonWrapper>
+    <div className="card-quote">
+      <div className="card-status">
+        <span className="card-status-placeholder"></span>
+      </div>
+      <div className="quote-body">
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+        <span className="quote-body-placeholder"></span>
+      </div>
+      <div className="quoted-from">
+        <span className="quoted-from-placeholder"></span>
+      </div>
+    </div>
+    <div className="card-menu">
+      <div className="menu-button"></div>
+      <div className="action-button"></div>
+      <div className="share-button"></div>
+    </div>
+  </QuoteCardSkeletonWrapper>
+);

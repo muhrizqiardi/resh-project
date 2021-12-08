@@ -1,17 +1,16 @@
 import { useSelector } from "react-redux";
-import BookCard from "../components/BookCard";
+import LibraryItemCard from "../components/LibraryItemCard";
 
 function LibraryModule(props) {
-  const { auth, library } = useSelector((state) => ({
-    auth: state.auth,
+  const { library } = useSelector((state) => ({
     library: state.library,
   }));
 
-  return library.library.map((libraryItem) => (
-    <BookCard
-      key={libraryItem.google_books_volume_id}
-      googleBooksVolumeId={libraryItem.google_books_volume_id}
-      user={{ username: libraryItem.username }}
+  return library.library.map((libraryData) => (
+    <LibraryItemCard
+      key={libraryData.google_books_volume_id}
+      libraryData={libraryData}
+      googleBooksVolumeId={libraryData.google_books_volume_id}
     />
   ));
 }

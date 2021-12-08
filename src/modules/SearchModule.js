@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import Textbox from "../components/TextBox";
 import noSearchQueryImg from "../assets/no-search-query.png";
+import { SearchItemCard } from "../components/SearchItemCard/SearchItemCard";
 
 export function SearchModule(props) {
   const [searchResult, setSearchResult] = useState([]);
@@ -34,17 +35,9 @@ export function SearchModule(props) {
 
       {searchQuery ? (
         searchResult.map((result) => (
-          <BookCard
+          <SearchItemCard
             key={result.id}
             googleBooksVolumeId={result.id}
-            user={{
-              username: "muhrizqiardi",
-              name: {
-                firstName: "Muhammad Rizqi",
-                lastName: "Ardiansyah",
-              },
-            }}
-            book={result}
           />
         ))
       ) : (
