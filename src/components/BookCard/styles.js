@@ -222,10 +222,19 @@ export const BookCardWrapper = styled.article`
 `;
 
 export const BookCardSkeletonWrapper = styled.div`
+  @keyframes pulse {
+    from {
+      filter: brightness(1);
+    }
+    to {
+      filter: brightness(0.85);
+    }
+  }
   /* Mobile */
   box-sizing: content-box;
   width: 100%;
   min-height: 120px;
+  animation: 0.5s linear 1s infinite alternate pulse;
   border: 3px solid lightgray;
   border-radius: 15px;
   display: grid;
