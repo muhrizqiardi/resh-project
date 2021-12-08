@@ -22,8 +22,8 @@ function App() {
       (event, session) => {
         dispatch.auth.handleSession();
       }
-    );
-    dispatch.library.getLibrary()
+      );
+      dispatch.library.getLibrary();
   }, []);
 
   return auth.loading ? (

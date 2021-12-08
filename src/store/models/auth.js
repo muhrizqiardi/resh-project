@@ -79,6 +79,7 @@ const auth = {
           dispatch.auth.setAccountCreated(true);
           dispatch.auth.setUser(data[0]);
           dispatch.auth.setLoading(false);
+          dispatch.library.getLibrary();
         } else {
           console.error("account isn't created");
         }
