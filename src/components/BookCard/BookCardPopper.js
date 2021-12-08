@@ -3,11 +3,7 @@ import { useDispatch } from "react-redux";
 import supabase from "../../configs/supabase";
 import { PopperItem, PopperWrapper } from "./styles";
 
-export default function BookCardPopper({
-  anchorEl,
-  googleBooksVolumeId,
-  username,
-}) {
+export default function BookCardPopper({ anchorEl, library_item_id }) {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 
@@ -20,14 +16,22 @@ export default function BookCardPopper({
           className="color-error"
           onClick={() =>
             dispatch.library.removeFromLibrary({
-              username,
-              google_books_volume_id: googleBooksVolumeId,
+              library_item_id,
             })
           }
         >
           Remove from library
         </PopperItem>
-        <PopperItem className="color-info">Start Reading</PopperItem>
+        <PopperItem
+          className="color-info"
+          onClick={() =>
+            dispatch.library.startReading({
+              library_item_id,
+            })
+          }
+        >
+          Start Reading
+        </PopperItem>
         <PopperItem>Create Review</PopperItem>
       </PopperWrapper>
     </Popper>

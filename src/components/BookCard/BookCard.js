@@ -33,7 +33,7 @@ export function BookCard({
 
   const libraryData = find(library.library, {
     google_books_volume_id: googleBooksVolumeId,
-  });
+  }) ?? false;
 
   async function getBookData() {
     try {
@@ -125,7 +125,10 @@ export function BookCard({
           >
             <img src={dotsMenu} alt="" />
           </button>
-          <BookCardPopper anchorEl={anchorEl} googleBooksVolumeId={googleBooksVolumeId} username={auth.user.username} />
+          <BookCardPopper
+            anchorEl={anchorEl}
+            library_item_id={libraryData.library_item_id}
+          />
           <div
             className="action-button"
             onClick={() => {
@@ -136,7 +139,13 @@ export function BookCard({
             }}
           >
             {libraryData ? (
-              <img src={startReadingIcon} />
+              libraryData.started_reading ? (
+                `${Math.round(
+                  (book.volumeInfo.pageCount / libraryData.current_page) * 100
+                )}%`
+              ) : (
+                <img src={startReadingIcon} />
+              )
             ) : (
               <img src={addToLibraryIcon} alt="" />
             )}
