@@ -10,6 +10,7 @@ import share from "../../assets/share.svg";
 import dotsMenu from "../../assets/dots-menu.svg";
 import startReadingIcon from "../../assets/start-reading.svg";
 import addToLibraryIcon from "../../assets/add-to-library.svg";
+import CardMenuPopup from "../CardMenuPopup";
 
 export function ReviewCard({ googleBooksVolumeId, activityData }) {
   const [bookData, setBookData] = useState();
@@ -63,19 +64,29 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
         <div className="rating">
           {activityData.activity_attribute.review.rating >= 0.2 ? (
             <i className="bx bxs-star"></i>
-          ) : (<i className="bx bx-star"></i>)}
+          ) : (
+            <i className="bx bx-star"></i>
+          )}
           {activityData.activity_attribute.review.rating >= 0.4 ? (
             <i className="bx bxs-star"></i>
-          ) : (<i className="bx bx-star"></i>)}
+          ) : (
+            <i className="bx bx-star"></i>
+          )}
           {activityData.activity_attribute.review.rating >= 0.6 ? (
             <i className="bx bxs-star"></i>
-          ) : (<i className="bx bx-star"></i>)}
+          ) : (
+            <i className="bx bx-star"></i>
+          )}
           {activityData.activity_attribute.review.rating >= 0.8 ? (
             <i className="bx bxs-star"></i>
-          ) : (<i className="bx bx-star"></i>)}
+          ) : (
+            <i className="bx bx-star"></i>
+          )}
           {activityData.activity_attribute.review.rating === 1 ? (
             <i className="bx bxs-star"></i>
-          ) : (<i className="bx bx-star"></i>)}
+          ) : (
+            <i className="bx bx-star"></i>
+          )}
         </div>
         <div className="review-body">
           {activityData.activity_attribute.review.body}
@@ -90,9 +101,12 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
         >
           <img src={dotsMenu} alt="" />
         </button>
-        <MenuPopup
+        <CardMenuPopup
           anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
           library_item_id={libraryData.library_item_id}
+          username={activityData.username}
+          googleBooksVolumeId={googleBooksVolumeId}
         />
         <button
           className="action-button"

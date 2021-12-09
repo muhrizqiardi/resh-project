@@ -1,9 +1,10 @@
 import Popper from "@mui/material/Popper";
 import { useDispatch } from "react-redux";
-import { PopperItem, PopperWrapper } from "./styles";
+import { PopperItem, PopperWrapper, PopupBackdrop } from "./styles";
 
-export default function MenuPopup({
+export default function CardMenuPopup({
   anchorEl,
+  setAnchorEl,
   library_item_id,
   username,
   googleBooksVolumeId,
@@ -20,48 +21,63 @@ export default function MenuPopup({
           <PopperWrapper className="">
             <PopperItem
               className="color-error"
-              onClick={() =>
+              onClick={(event) => {
                 dispatch.library.removeFromLibrary({
                   library_item_id,
-                })
-              }
+                });
+                setAnchorEl(anchorEl ? null : event.currentTarget);
+              }}
             >
               Remove from library
             </PopperItem>
             <PopperItem
               className="color-info"
-              onClick={() =>
+              onClick={(event) =>{
                 dispatch.library.startReading({
                   library_item_id,
-                })
-              }
+                });
+                setAnchorEl(anchorEl ? null : event.currentTarget);
+              }}
             >
               Start Reading
             </PopperItem>
-            <PopperItem>Create Review</PopperItem>
-            <PopperItem>Quote this Book</PopperItem>
+            <PopperItem onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget)
+            }}>Create Review</PopperItem>
+            <PopperItem onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget)
+            }}>Quote this Book</PopperItem>
           </PopperWrapper>
         ) : (
           <PopperWrapper className="">
             <PopperItem
               className="color-info"
-              onClick={() => {
+              onClick={(event) => {
                 dispatch.library.addToLibrary({
                   username,
                   google_books_volume_id: googleBooksVolumeId,
                 });
+                setAnchorEl(anchorEl ? null : event.currentTarget);
               }}
             >
               Add to library
             </PopperItem>
-            <PopperItem>Create Review</PopperItem>
-            <PopperItem>Quote this Book</PopperItem>
+            <PopperItem onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget)
+            }}>Create Review</PopperItem>
+            <PopperItem onClick={(event) => {
+              setAnchorEl(anchorEl ? null : event.currentTarget)
+            }}>Quote this Book</PopperItem>
           </PopperWrapper>
         )}
       </Popper>
-      <div className="popup-backdrop">
-
-      </div>
+      {open && (
+        <PopupBackdrop
+          onClick={(event) =>
+            setAnchorEl(anchorEl ? null : event.currentTarget)
+          }
+        />
+      )}
     </>
   );
 }

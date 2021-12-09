@@ -17,7 +17,7 @@ const library = {
       return _.cloneDeep({ ...state, error: payload });
     },
     setLibraryState(state, payload) {
-      let newLibrary = [...state.library, ...payload];
+      let newLibrary = [...payload];
       return _.cloneDeep({ ...state, library: newLibrary });
     },
     addToLibraryState(state, payload) {
@@ -28,7 +28,7 @@ const library = {
     removeFromLibraryState(state, payload) {
       let newLibrary = [...state.library];
       _.remove(newLibrary, {
-        google_books_volume_id: payload.google_books_volume_id,
+        library_item_id: payload.library_item_id,
       });
       return _.cloneDeep({ ...state, library: newLibrary });
     },
@@ -64,7 +64,7 @@ const library = {
         if (error) throw error;
         if (data) {
           console.log("success", data);
-          dispatch.library.addToLibraryState(data[0]);
+          dispatch.library.getLibrary();
         }
       } catch (error) {
         console.error(error);
@@ -85,7 +85,7 @@ const library = {
         if (error) throw error;
         if (data) {
           console.log("success", data);
-          dispatch.library.removeFromLibraryState(payload);
+          dispatch.library.getLibrary();
         }
       } catch (error) {
         console.error(error);
