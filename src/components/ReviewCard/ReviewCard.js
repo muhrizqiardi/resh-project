@@ -11,28 +11,55 @@ import dotsMenu from "../../assets/dots-menu.svg";
 import startReadingIcon from "../../assets/start-reading.svg";
 import addToLibraryIcon from "../../assets/add-to-library.svg";
 import CardMenuPopup from "../CardMenuPopup";
+import ProgressUpdater from "../ProgressUpdater/ProgressUpdater";
 
 export function ReviewCard({ googleBooksVolumeId, activityData }) {
   const [bookData, setBookData] = useState();
   const dispatch = useDispatch();
-  const { library } = useSelector(({ library }) => ({ library }));
+  const { library, auth } = useSelector(({ library, auth }) => ({
+    library,
+    auth,
+  }));
   const libraryData =
     find(library.library, { google_books_volume_id: googleBooksVolumeId }) ??
     false;
   const readingProgress = libraryData.started_reading
-    ? Math.round(bookData.volumeInfo.pageCount / libraryData.current_page)
+    ? libraryData.current_page / libraryData.page_count
     : false;
 
-  console.log(googleBooksVolumeId, libraryData);
-
   const [anchorEl, setAnchorEl] = useState(null);
+  const [progressUpdaterOpened, setProgressUpdaterOpened] = useState(false);
+
+  const actionButtonHandler = () => {
+    console.log({ libraryData });
+    if (libraryData) {
+      if (libraryData.started_reading) {
+        // TODO: progress updater
+        setProgressUpdaterOpened(true);
+      } else {
+        dispatch.library.startReading({
+          library_item_id: libraryData.library_item_id,
+        });
+      }
+    } else {
+      dispatch.library.addToLibrary({
+        username: auth.user.username,
+        page_count:
+          bookData.volumeInfo.pageCount ??
+          prompt(
+            "Unfortunately, we don't have an information of the page count of this book. Please enter the page count of this book yourself.",
+            "Page count"
+          ),
+        google_books_volume_id: googleBooksVolumeId,
+      });
+    }
+  };
 
   async function getBookData() {
     try {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes/${googleBooksVolumeId}`
       );
-      console.log("response for book", response.data);
       setBookData(response.data);
     } catch (error) {
       console.error(error);
@@ -42,7 +69,6 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
   useEffect(() => {
     getBookData();
   }, []);
-
   return bookData ? (
     <ReviewCardWrapper>
       <div className="card-img">
@@ -106,18 +132,27 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
           setAnchorEl={setAnchorEl}
           library_item_id={libraryData.library_item_id}
           username={activityData.username}
+          page_count={libraryData.page_count}
           googleBooksVolumeId={googleBooksVolumeId}
         />
+        {progressUpdaterOpened && (
+          <ProgressUpdater
+            progressUpdaterOpened={progressUpdaterOpened}
+            setProgressUpdaterOpened={setProgressUpdaterOpened}
+            username={auth.user.username}
+            library_item_id={libraryData.library_item_id}
+            title={bookData.volumeInfo.title}
+            current_page={libraryData.current_page}
+            page_count={libraryData.page_count}
+          />
+        )}
         <button
           className="action-button"
-          onClick={() => {
-            dispatch.library.addToLibrary({
-              username: activityData.username,
-              google_books_volume_id: googleBooksVolumeId,
-            });
-          }}
+          onClick={() => actionButtonHandler(libraryData)}
         >
-          {libraryData && libraryData.started_reading && readingProgress * 100}
+          {libraryData &&
+            libraryData.started_reading &&
+            Math.round(readingProgress * 100) + "%"}
           {libraryData && !libraryData.started_reading && (
             <img src={startReadingIcon} />
           )}

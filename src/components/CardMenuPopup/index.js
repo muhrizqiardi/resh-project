@@ -7,6 +7,7 @@ export default function CardMenuPopup({
   setAnchorEl,
   library_item_id,
   username,
+  page_count,
   googleBooksVolumeId,
 }) {
   const open = Boolean(anchorEl);
@@ -56,6 +57,7 @@ export default function CardMenuPopup({
                 dispatch.library.addToLibrary({
                   username,
                   google_books_volume_id: googleBooksVolumeId,
+                  page_count: page_count
                 });
                 setAnchorEl(anchorEl ? null : event.currentTarget);
               }}
