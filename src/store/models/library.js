@@ -17,18 +17,17 @@ const library = {
       return _.cloneDeep({ ...state, error: payload });
     },
     setLibraryState(state, payload) {
-      let newLibrary = [...state.library, ...payload];
+      let newLibrary = [...payload];
       return _.cloneDeep({ ...state, library: newLibrary });
     },
     addToLibraryState(state, payload) {
       let newLibrary = [...state.library, payload];
-      console.log({ newLibrary });
       return _.cloneDeep({ ...state, library: newLibrary });
     },
     removeFromLibraryState(state, payload) {
       let newLibrary = [...state.library];
       _.remove(newLibrary, {
-        google_books_volume_id: payload.google_books_volume_id,
+        library_item_id: payload.library_item_id,
       });
       return _.cloneDeep({ ...state, library: newLibrary });
     },
@@ -45,7 +44,6 @@ const library = {
           .match({ username: rootState.auth.user.username });
         if (error) throw error;
         if (data) {
-          console.log("success", data);
           dispatch.library.setLibraryState(data);
         }
       } catch (error) {
@@ -63,8 +61,7 @@ const library = {
           .insert([payload]);
         if (error) throw error;
         if (data) {
-          console.log("success", data);
-          dispatch.library.addToLibraryState(data[0]);
+          dispatch.library.getLibrary();
         }
       } catch (error) {
         console.error(error);
@@ -84,8 +81,7 @@ const library = {
           });
         if (error) throw error;
         if (data) {
-          console.log("success", data);
-          dispatch.library.removeFromLibraryState(payload);
+          dispatch.library.getLibrary();
         }
       } catch (error) {
         console.error(error);
@@ -97,15 +93,40 @@ const library = {
     async startReading(payload, rootState) {
       if (!rootState.loading) dispatch.library.setLoading(true);
       try {
-        const { data, error } = await supabase.from("library_item").upsert({
-          username: payload.username,
-          google_books_volume_id: payload.google_books_volume_id,
-          current_page: 0,
-          started_reading: moment.utc().format(),
-        });
+        const { data, error } = await supabase
+          .from("library_item")
+          .update({
+            started_reading: moment.utc().format(),
+            current_page: 0,
+          })
+          .match({ library_item_id: payload.library_item_id });
         if (error) throw error;
         if (data) {
-          console.log("success", data);
+          dispatch.library.getLibrary();
+        }
+      } catch (error) {
+        console.error(error);
+        dispatch.library.setError(error);
+      } finally {
+        dispatch.library.setLoading(false);
+      }
+    },
+    async updateReadingProgress(payload, rootState) {
+      if (!rootState.loading) dispatch.library.setLoading(true);
+      console.log({payload});
+      try {
+        if (!payload.page_count) throw error;
+        const { data, error } = await supabase.from("library_item").update({
+          username: payload.username,
+          google_books_volume_id: payload.google_books_volume_id,
+          current_page: payload.current_page,
+          finished_reading:
+            payload.page_count === payload.current_page
+              ? moment.utc().format()
+              : null,
+        }).match({library_item_id: payload.library_item_id});
+        if (error) throw error;
+        if (data) {
           dispatch.library.getLibrary();
         }
       } catch (error) {

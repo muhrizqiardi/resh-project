@@ -23,7 +23,6 @@ const auth = {
       return _.cloneDeep({ ...state, error: payload });
     },
     setSession(state, payload) {
-      console.log({ "the session": payload });
       return _.cloneDeep({ ...state, session: payload });
     },
     setMagicLinkSent(state, payload) {
@@ -66,16 +65,13 @@ const auth = {
     async getUser(payload, rootState) {
       try {
         if (!rootState.auth.loading) dispatch.auth.setLoading(true);
-        console.log("rootState", rootState);
         const { email } = rootState.auth.session.user;
         const { data, error, status } = await supabase
           .from("user")
           .select()
           .eq("email", email);
-        console.log("query data", data);
         if (error && status !== 406) throw error;
         if (data.length > 0) {
-          console.log("account is created, redirecting");
           dispatch.auth.setAccountCreated(true);
           dispatch.auth.setUser(data[0]);
           dispatch.auth.setLoading(false);

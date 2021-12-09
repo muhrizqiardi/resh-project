@@ -41,10 +41,6 @@ function CreateAccount(props) {
           <Main
             onSubmit={async (e) => {
               e.preventDefault();
-              console.log(e.target.email.value);
-              console.log(e.target.username.value);
-              console.log(e.target.firstName.value);
-              console.log(e.target.lastName.value);
               const { data, error } = await supabase.from("user").insert([
                 {
                   email: e.target.email.value,
