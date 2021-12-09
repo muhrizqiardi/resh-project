@@ -10,6 +10,7 @@ import share from "../../assets/share.svg";
 import dotsMenu from "../../assets/dots-menu.svg";
 import startReadingIcon from "../../assets/start-reading.svg";
 import addToLibraryIcon from "../../assets/add-to-library.svg";
+import CardMenuPopup from "../CardMenuPopup";
 
 export function ActivityCard({ googleBooksVolumeId, activityData }) {
   const [bookData, setBookData] = useState();
@@ -74,9 +75,12 @@ export function ActivityCard({ googleBooksVolumeId, activityData }) {
         >
           <img src={dotsMenu} alt="" />
         </button>
-        <MenuPopup
+        <CardMenuPopup
           anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
           library_item_id={libraryData.library_item_id}
+          username={activityData.username}
+          googleBooksVolumeId={googleBooksVolumeId}
         />
         <button
           className="action-button"
