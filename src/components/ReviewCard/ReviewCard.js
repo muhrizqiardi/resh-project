@@ -13,7 +13,7 @@ import addToLibraryIcon from "../../assets/add-to-library.svg";
 import CardMenuPopup from "../CardMenuPopup";
 import ProgressUpdater from "../ProgressUpdater/ProgressUpdater";
 
-export function ReviewCard({ googleBooksVolumeId, activityData }) {
+export function ReviewCard({ activity_id, google_books_volume_id: googleBooksVolumeId, username, occured_at, activity_attribute: activityData }) {
   const [bookData, setBookData] = useState();
   const dispatch = useDispatch();
   const { library, auth } = useSelector(({ library, auth }) => ({
@@ -39,6 +39,7 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
       } else {
         dispatch.library.startReading({
           library_item_id: libraryData.library_item_id,
+          google_books_volume_id: googleBooksVolumeId,
         });
       }
     } else {
@@ -81,8 +82,7 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
       </div>
       <div className="card-desc">
         <div className="card-status">
-          {activityData.username} {activityData.activity_type}{" "}
-          {moment(activityData.occured_at).fromNow()}
+          {username} {activityData.activity_type} {moment(occured_at).fromNow()}
         </div>
         <div className="book-title">
           <Link to={`/books/${bookData.id}`}>{bookData.volumeInfo.title}</Link>
@@ -144,17 +144,18 @@ export function ReviewCard({ googleBooksVolumeId, activityData }) {
             title={bookData.volumeInfo.title}
             current_page={libraryData.current_page}
             page_count={libraryData.page_count}
+            google_books_volume_id={googleBooksVolumeId}
           />
         )}
         <button
           className="action-button"
           onClick={() => actionButtonHandler(libraryData)}
         >
-          {libraryData &&
+          <span className="color-success">{libraryData &&
             libraryData.started_reading &&
-            Math.round(readingProgress * 100) + "%"}
+            Math.round(readingProgress * 100) + "%"}</span>
           {libraryData && !libraryData.started_reading && (
-            <img src={startReadingIcon} />
+            <span style={{ fontSize: 9 }}>START</span>
           )}
           {!libraryData && <img src={addToLibraryIcon} />}
         </button>

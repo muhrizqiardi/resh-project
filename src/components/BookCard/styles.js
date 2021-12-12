@@ -86,6 +86,7 @@ export const BookCardWrapper = styled.article`
     }
   }
   .card-menu {
+    height: 120px;
     padding: 10px;
     display: flex;
     flex-direction: column;

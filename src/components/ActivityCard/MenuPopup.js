@@ -33,6 +33,7 @@ export default function MenuPopup({
               onClick={() =>
                 dispatch.library.startReading({
                   library_item_id,
+                  google_books_volume_id: googleBooksVolumeId,
                 })
               }
             >
@@ -59,9 +60,7 @@ export default function MenuPopup({
           </PopperWrapper>
         )}
       </Popper>
-      <div className="popup-backdrop">
-
-      </div>
+      <div className="popup-backdrop"></div>
     </>
   );
 }

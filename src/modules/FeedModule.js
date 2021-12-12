@@ -2,33 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ActivityCard from "../components/ActivityCard";
 import ReviewCard from "../components/ReviewCard";
-import QuoteCard from "../components/QuoteCard"
+import QuoteCard from "../components/QuoteCard";
 import BookCard from "../components/BookCard";
 import { BookCardSkeleton } from "../components/BookCard/BookCard";
+import { useDispatch, useSelector } from "react-redux";
 
 export function FeedModule(props) {
-  const [feed, setFeed] = useState([]);
-  const [feedLoading, setFeedLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { userActivity } = useSelector(({ userActivity }) => ({
+    userActivity,
+  }));
 
   async function getFeed() {
-    try {
-      setFeedLoading(true);
-      const response = await axios.get(
-        `${process.env.REACT_APP_MOCK_API_URL}/feed`
-      );
-      setFeed(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setFeedLoading(false);
-    }
+    await dispatch.userActivity.getActivityFeed();
   }
 
   useEffect(() => {
     getFeed();
   }, []);
 
-  return feedLoading ? (
+  return userActivity.loading ? (
     <>
       <BookCardSkeleton />
       <BookCardSkeleton />
@@ -37,17 +30,17 @@ export function FeedModule(props) {
     </>
   ) : (
     <>
-      {feed.map((item) => {
-        if (item.activityData.activity_type === "added to library") {
-          return <ActivityCard key={item.activityData.activity_id} {...item} />;
-        } else if (item.activityData.activity_type === "started reading") {
-          return <ActivityCard key={item.activityData.activity_id} {...item} />;
-        } else if (item.activityData.activity_type === "finished reading") {
-          return <ActivityCard key={item.activityData.activity_id} {...item} />;
-        } else if (item.activityData.activity_type === "shared") {
-          return <QuoteCard key={item.activityData.activity_id} {...item} />;
-        } else if (item.activityData.activity_type === "reviewed") {
-          return <ReviewCard key={item.activityData.activity_id} {...item} />;
+      {userActivity.feed.map((item) => {
+        if (item.activity_attribute.activity_type === "added to library") {
+          return <ActivityCard key={item.activity_id} {...item} />;
+        } else if (item.activity_attribute.activity_type === "started reading") {
+          return <ActivityCard key={item.activity_id} {...item} />;
+        } else if (item.activity_attribute.activity_type === "finished reading") {
+          return <ActivityCard key={item.activity_id} {...item} />;
+        } else if (item.activity_attribute.activity_type === "shared") {
+          return <QuoteCard key={item.activity_id} {...item} />;
+        } else if (item.activity_attribute.activity_type === "reviewed") {
+          return <ReviewCard key={item.activity_id} {...item} />;
         }
       })}
     </>

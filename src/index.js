@@ -13,6 +13,18 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${colorPalette.light.rgb()};
     font-family: "Inter", Arial, Helvetica, sans-serif;
   }
+  .color-error {
+    color: ${colorPalette.error.rgb()};
+  }
+  .color-info {
+    color: ${colorPalette.info.rgb()};
+  }
+  .color-success {
+    color: ${colorPalette.success.rgb()};
+  }
+  .color-warning {
+    color: ${colorPalette.warning.rgb()};
+  }
 `;
 
 ReactDOM.render(
@@ -23,7 +35,6 @@ ReactDOM.render(
         <App />
       </Router>
     </Provider>
-  </>
-  ,
+  </>,
   document.getElementById("root")
 );

@@ -40,6 +40,7 @@ export function SearchItemCard({ googleBooksVolumeId }) {
       } else {
         dispatch.library.startReading({
           library_item_id: libraryData.library_item_id,
+          google_books_volume_id: googleBooksVolumeId,
         });
       }
     } else {
@@ -117,17 +118,18 @@ export function SearchItemCard({ googleBooksVolumeId }) {
             title={bookData.volumeInfo.title}
             current_page={libraryData.current_page}
             page_count={libraryData.page_count}
+            google_books_volume_id={googleBooksVolumeId}
           />
         )}
         <button
           className="action-button"
           onClick={() => actionButtonHandler(libraryData)}
         >
-          {libraryData &&
+          <span className="color-success">{libraryData &&
             libraryData.started_reading &&
-            Math.round(readingProgress * 100) + "%"}
+            Math.round(readingProgress * 100) + "%"}</span>
           {libraryData && !libraryData.started_reading && (
-            <img src={startReadingIcon} />
+            <span style={{ fontSize: 9 }}>START</span>
           )}
           {!libraryData && <img src={addToLibraryIcon} />}
         </button>

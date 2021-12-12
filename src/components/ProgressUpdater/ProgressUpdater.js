@@ -18,6 +18,7 @@ function ProgressUpdater({
   library_item_id,
   current_page,
   page_count,
+  google_books_volume_id,
 }) {
   const [newCurrentPage, setNewCurrentPage] = useState(current_page);
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function ProgressUpdater({
       library_item_id,
       current_page: newCurrentPage,
       page_count,
+      google_books_volume_id,
     });
     setProgressUpdaterOpened(false);
   };
@@ -48,14 +50,19 @@ function ProgressUpdater({
             marginTop: 24,
           }}
           type="number"
-          onChange={(e) => setNewCurrentPage(e.target.value)}
+          onChange={(e) => setNewCurrentPage(parseInt(e.target.value))}
           value={newCurrentPage}
         ></TextBox>
         <Text>of {page_count}</Text>
         <ButtonPrimary
           style={{ marginTop: 24 }}
           onClick={handleUpdateButton}
-          disabled={newCurrentPage > page_count || newCurrentPage === null || newCurrentPage === undefined || newCurrentPage === ""}
+          disabled={
+            newCurrentPage > page_count ||
+            newCurrentPage === null ||
+            newCurrentPage === undefined ||
+            newCurrentPage === ""
+          }
         >
           Update
         </ButtonPrimary>

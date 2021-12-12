@@ -143,7 +143,7 @@ export function BookCard({
                   (book.volumeInfo.pageCount / libraryData.current_page) * 100
                 )}%`
               ) : (
-                <img src={startReadingIcon} />
+                <span style={{fontSize: 9}}>START</span>
               )
             ) : (
               <img src={addToLibraryIcon} alt="" />

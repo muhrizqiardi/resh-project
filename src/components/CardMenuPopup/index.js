@@ -36,6 +36,7 @@ export default function CardMenuPopup({
               onClick={(event) =>{
                 dispatch.library.startReading({
                   library_item_id,
+                  google_books_volume_id: googleBooksVolumeId,
                 });
                 setAnchorEl(anchorEl ? null : event.currentTarget);
               }}

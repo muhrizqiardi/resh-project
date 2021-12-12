@@ -62,6 +62,13 @@ const library = {
         if (error) throw error;
         if (data) {
           dispatch.library.getLibrary();
+          dispatch.userActivity.addToActivityFeed({
+            google_books_volume_id: payload.google_books_volume_id,
+            username: payload.username,
+            activity_attribute: {
+              activity_type: "added to library",
+            },
+          });
         }
       } catch (error) {
         console.error(error);
@@ -103,6 +110,13 @@ const library = {
         if (error) throw error;
         if (data) {
           dispatch.library.getLibrary();
+          dispatch.userActivity.addToActivityFeed({
+            google_books_volume_id: payload.google_books_volume_id,
+            username: rootState.auth.user.username,
+            activity_attribute: {
+              activity_type: "started reading",
+            },
+          });
         }
       } catch (error) {
         console.error(error);
@@ -113,21 +127,35 @@ const library = {
     },
     async updateReadingProgress(payload, rootState) {
       if (!rootState.loading) dispatch.library.setLoading(true);
-      console.log({payload});
+      console.log({ payload });
       try {
         if (!payload.page_count) throw error;
-        const { data, error } = await supabase.from("library_item").update({
-          username: payload.username,
-          google_books_volume_id: payload.google_books_volume_id,
-          current_page: payload.current_page,
-          finished_reading:
-            payload.page_count === payload.current_page
-              ? moment.utc().format()
-              : null,
-        }).match({library_item_id: payload.library_item_id});
+        console.log("finished", payload.page_count === payload.current_page);
+        const { data, error } = await supabase
+          .from("library_item")
+          .update({
+            username: payload.username,
+            google_books_volume_id: payload.google_books_volume_id,
+            current_page: payload.current_page,
+            finished_reading:
+              payload.page_count === payload.current_page
+                ? moment.utc().format()
+                : null,
+          })
+          .match({ library_item_id: payload.library_item_id });
+        console.log({ data });
         if (error) throw error;
         if (data) {
           dispatch.library.getLibrary();
+          if (payload.page_count === payload.current_page) {
+            dispatch.userActivity.addToActivityFeed({
+              google_books_volume_id: payload.google_books_volume_id,
+              username: rootState.auth.user.username,
+              activity_attribute: {
+                activity_type: "finished reading",
+              },
+            });
+          }
         }
       } catch (error) {
         console.error(error);
